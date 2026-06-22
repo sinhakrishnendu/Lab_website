@@ -26,6 +26,7 @@ Scholarly profiles:
 ├── script.js
 ├── .nojekyll
 └── assets/
+    ├── soybean-wrky-fig5b-lab-icon.png
     ├── sinha-molecular-evolution-group-logo.svg
     ├── molecular-evolution-hero.png
     ├── krishnendu-sinha.jpeg
@@ -36,7 +37,7 @@ Scholarly profiles:
 
 The active homepage background is `assets/sinha-lab-research-background.png`, an original visual composed around sequence alignment, branch-site selection, protein-interface evolution, Arabidopsis COL5, mosquito FBN30, and computational molecular evolution themes.
 
-The group logo is `assets/sinha-molecular-evolution-group-logo.svg`, an original vector mark built around publication-aligned motifs: sequence alignment, phylogenetic branching, adaptive-selection highlights, and molecular evolution.
+The active header icon is `assets/soybean-wrky-fig5b-lab-icon.png`, using Fig. 5b from the Scientific Reports article at <https://doi.org/10.1038/s41598-024-77156-5>. The image is credited on the website footer and is associated with the CC BY-NC-ND 4.0 license. The original vector mark remains available at `assets/sinha-molecular-evolution-group-logo.svg`.
 
 The principal investigator portrait is stored at `assets/krishnendu-sinha.jpeg`.
 
@@ -79,6 +80,6 @@ When updating the website:
 
 ## Content
 
-The logo and publication figure panels used on the homepage are original schematic summaries prepared for web presentation. They are not reproductions of published journal figures.
+The homepage schematic panels are original summaries prepared for web presentation. The header icon uses Fig. 5b from the Scientific Reports article at <https://doi.org/10.1038/s41598-024-77156-5>, with footer attribution and license link.
 
 The website uses a textual Visva-Bharati affiliation mark. The official Visva-Bharati seal or logo is not bundled in this repository unless separately authorized.
