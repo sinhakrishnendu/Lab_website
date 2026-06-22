@@ -196,8 +196,14 @@ h3 {
   border: 1px solid currentColor;
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.09);
-  font-size: 0.8rem;
-  font-weight: 850;
+  overflow: hidden;
+  padding: 4px;
+}
+
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .brand strong,

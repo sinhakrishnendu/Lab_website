@@ -26,6 +26,7 @@ Scholarly profiles:
 ├── script.js
 ├── .nojekyll
 └── assets/
+    ├── sinha-molecular-evolution-group-logo.svg
     ├── molecular-evolution-hero.png
     ├── krishnendu-sinha.jpeg
     └── sinha-lab-research-background.png
@@ -34,6 +35,8 @@ Scholarly profiles:
 `index.html` contains the page content, publication highlights, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
 
 The active homepage background is `assets/sinha-lab-research-background.png`, an original visual composed around sequence alignment, branch-site selection, protein-interface evolution, Arabidopsis COL5, mosquito FBN30, and computational molecular evolution themes.
+
+The group logo is `assets/sinha-molecular-evolution-group-logo.svg`, an original vector mark built around publication-aligned motifs: sequence alignment, phylogenetic branching, adaptive-selection highlights, and molecular evolution.
 
 The principal investigator portrait is stored at `assets/krishnendu-sinha.jpeg`.
 
@@ -76,6 +79,6 @@ When updating the website:
 
 ## Content
 
-The publication figure panels used on the homepage are original schematic summaries prepared for web presentation. They are not reproductions of published journal figures.
+The logo and publication figure panels used on the homepage are original schematic summaries prepared for web presentation. They are not reproductions of published journal figures.
 
 The website uses a textual Visva-Bharati University affiliation mark. The official university seal or logo is not bundled in this repository unless separately authorized.
