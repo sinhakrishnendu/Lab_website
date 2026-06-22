@@ -383,6 +383,10 @@ h3 {
   background: #eef2f0;
 }
 
+#people {
+  background: #e8ebef;
+}
+
 .section-heading {
   max-width: 760px;
   margin-bottom: 38px;
@@ -659,9 +663,9 @@ h3 {
 }
 
 .featured-person {
-  background:
-    linear-gradient(135deg, rgba(199, 160, 74, 0.12), rgba(52, 92, 114, 0.08)),
-    var(--white);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .person-avatar {
@@ -691,6 +695,7 @@ h3 {
   border: 0;
   border-radius: 0;
   background: transparent;
+  mix-blend-mode: multiply;
 }
 
 .person-links {
