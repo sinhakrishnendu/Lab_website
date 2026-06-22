@@ -8,6 +8,7 @@
       content="Sinha Molecular Evolution Group at Visva-Bharati, studying adaptive molecular evolution, phylogenetics, protein evolution, and computational bioinformatics."
     >
     <title>Sinha Molecular Evolution Group | Visva-Bharati</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -130,73 +131,12 @@
             <p class="section-kicker">Publications</p>
             <h2>Selected Work</h2>
             <p>
-              Publication highlights are linked through DOI records and scholarly profiles.
-              The figure panels below are original schematic summaries for the group website.
+              The three highlighted tiles are populated from a profile-derived publication
+              list. The full publication record remains available through scholarly profiles.
             </p>
           </div>
 
-          <div class="publication-grid">
-            <article class="publication-card feature-publication">
-              <figure class="paper-figure alignment-figure" aria-label="Schematic sequence alignment figure">
-                <span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span>
-              </figure>
-              <div class="publication-body">
-                <p class="journal">Bioinformatics · 2026</p>
-                <h3>BABAPPAlign: a multiple sequence alignment engine with a learned residue-level scoring function</h3>
-                <p>
-                  A computational method for sequence alignment that uses a learned residue-level
-                  scoring function to support molecular sequence analysis.
-                </p>
-                <a class="text-link" href="https://doi.org/10.1093/bioinformatics/btag189" target="_blank" rel="noreferrer">
-                  DOI: 10.1093/bioinformatics/btag189
-                </a>
-              </div>
-            </article>
-
-            <article class="publication-card">
-              <figure class="paper-figure selection-figure" aria-label="Schematic branch-site selection figure">
-                <span class="tree-line root"></span>
-                <span class="tree-line branch-a"></span>
-                <span class="tree-line branch-b"></span>
-                <span class="tree-line branch-c"></span>
-                <span class="pulse pulse-one"></span>
-                <span class="pulse pulse-two"></span>
-              </figure>
-              <div class="publication-body">
-                <p class="journal">Scientific Reports · 2026</p>
-                <h3>Episodic positive selection structurally stabilizes the Arabidopsis CONSTANS-like gene COL5 indicating adaptive evolution</h3>
-                <p>
-                  Links signatures of positive selection to structural stabilization in an
-                  Arabidopsis light-signaling gene.
-                </p>
-                <a class="text-link" href="https://doi.org/10.1038/s41598-025-34129-6" target="_blank" rel="noreferrer">
-                  DOI: 10.1038/s41598-025-34129-6
-                </a>
-              </div>
-            </article>
-
-            <article class="publication-card">
-              <figure class="paper-figure interface-figure" aria-label="Schematic protein interface figure">
-                <span class="protein protein-a"></span>
-                <span class="protein protein-b"></span>
-                <span class="site site-a"></span>
-                <span class="site site-b"></span>
-                <span class="site site-c"></span>
-              </figure>
-              <div class="publication-body">
-                <p class="journal">Preprint / Current Work</p>
-                <h3>Lineage-specific adaptive evolution of mosquito fibrinogen-related protein FBN30</h3>
-                <p>
-                  Investigates adaptive evolution at a predicted parasite-facing interface in
-                  mosquito immune-related proteins.
-                </p>
-                <a class="text-link" href="https://doi.org/10.21203/rs.3.rs-8743126/v1" target="_blank" rel="noreferrer">
-                  DOI: 10.21203/rs.3.rs-8743126/v1
-                </a>
-              </div>
-            </article>
-          </div>
+          <div class="publication-grid" data-selected-publications></div>
 
           <div class="profile-links" aria-label="Scholarly profiles">
             <a href="https://scholar.google.com/citations?user=ZEI-IzMAAAAJ&hl=en&authuser=1" target="_blank" rel="noreferrer">
@@ -342,6 +282,6 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=orcid-publications-20260622"></script>
   </body>
 </html>

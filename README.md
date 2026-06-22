@@ -26,14 +26,17 @@ Scholarly profiles:
 ├── script.js
 ├── .nojekyll
 └── assets/
+    ├── favicon.svg
     ├── molecular-evolution-hero.png
     ├── krishnendu-sinha.jpeg
     └── sinha-lab-research-background.png
 ```
 
-`index.html` contains the page content, publication highlights, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
+`index.html` contains the page content, publication area, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` fetches public ORCID works at page load, ranks the selected-publication tiles by venue strength, topical relevance, and recency, and falls back to a curated data list if the profile API is unavailable. It also controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
 
 The active homepage background is `assets/sinha-lab-research-background.png`, an original software-centered visual inspired by BABAPPAlign and BABAPPASnake: multiple sequence alignment blocks, learned residue-level scoring, workflow orchestration, and robustness-summary motifs.
+
+The browser tab favicon is `assets/favicon.svg`, an original abstract alignment/workflow mark.
 
 The principal investigator portrait is stored at `assets/krishnendu-sinha.jpeg`.
 
@@ -69,6 +72,7 @@ When updating the website:
 
 - Keep `index.html` in the repository root.
 - Keep publication links DOI-based where possible.
+- Keep the ORCID profile updated; the selected-publication tiles refresh automatically from public ORCID works when the API is reachable.
 - Use original or properly licensed figures and media.
 - Use institutional marks and seals only when the appropriate permission or license is available.
 - Add new group members, publications, software, and datasets as the group grows.
