@@ -1,8 +1,8 @@
-# Sinha Molecular Evolution Lab
+# Sinha Molecular Evolution Group
 
-Official website repository for the Sinha Molecular Evolution Lab, Department of Zoology, Siksha Bhavana, Visva-Bharati University.
+Official website repository for the Sinha Molecular Evolution Group, Department of Zoology, Siksha Bhavana, Visva-Bharati University.
 
-The website presents the laboratory's research program in molecular evolution, adaptive selection, protein evolution, phylogenetics, and computational bioinformatics. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
+The website presents the group's research program in molecular evolution, adaptive selection, protein evolution, phylogenetics, and computational bioinformatics. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
 
 ## Website
 
@@ -71,7 +71,7 @@ When updating the website:
 - Keep publication links DOI-based where possible.
 - Use original or properly licensed figures and media.
 - Use university marks, seals, and logos only when the appropriate institutional permission or license is available.
-- Add new lab members, publications, software, and datasets as the group grows.
+- Add new group members, publications, software, and datasets as the group grows.
 - Check both desktop and mobile layouts after major edits.
 
 ## Content
