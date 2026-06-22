@@ -1,23 +1,40 @@
-# Sinha Molecular Evolution Lab Website
+# Sinha Molecular Evolution Lab
 
-This is a free, static website for the Sinha Molecular Evolution Lab at Visva-Bharati University. It uses plain HTML, CSS, JavaScript, and local assets, so the folder can be published directly through GitHub Desktop and hosted at no cost on GitHub Pages.
+Official website repository for the Sinha Molecular Evolution Lab, Department of Zoology, Siksha Bhavana, Visva-Bharati University.
 
-## Edit the Site
+The website presents the laboratory's research program in molecular evolution, adaptive selection, protein evolution, phylogenetics, and computational bioinformatics. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
 
-- Homepage content: `index.html`
-- Styling: `styles.css`
-- Small navigation behavior: `script.js`
-- Hero image: `assets/molecular-evolution-hero.png`
+## Website
 
-Before publishing, replace these placeholders:
+Primary deployment:
 
-- Add office / room details if desired
-- Add additional lab members
-- Add more publications, datasets, software links, and project descriptions
+```text
+https://sinhakrishnendu.github.io/Lab_website/
+```
 
-## Preview Locally
+Scholarly profiles:
 
-Open `index.html` in a browser, or run a small local server:
+- ORCID: <https://orcid.org/0000-0001-9590-3875>
+- Google Scholar: <https://scholar.google.com/citations?user=ZEI-IzMAAAAJ&hl=en&authuser=1>
+- Personal website: <https://sinhakrishnendu.github.io/>
+
+## Repository Structure
+
+```text
+.
+├── index.html
+├── styles.css
+├── script.js
+├── .nojekyll
+└── assets/
+    └── molecular-evolution-hero.png
+```
+
+`index.html` contains the page content, publication highlights, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
+
+## Local Preview
+
+The site can be opened directly from `index.html`. For a browser preview that matches normal web hosting more closely, run:
 
 ```bash
 python3 -m http.server 8080
@@ -29,30 +46,28 @@ Then visit:
 http://localhost:8080
 ```
 
-## Publish for Free on GitHub Pages
+## Deployment
 
-1. Open this folder in GitHub Desktop.
-2. Create or publish the repository from GitHub Desktop.
-3. Commit the files and push to GitHub.
-4. On GitHub, open the repository and go to Settings > Pages.
-5. Under "Build and deployment", choose "Deploy from a branch".
-6. Select the `main` branch and `/root`.
-7. Save. GitHub will give you a free website URL.
+The site is designed for GitHub Pages deployment from the repository root.
 
-The free URL usually looks like:
+Recommended GitHub Pages settings:
 
-```text
-https://your-github-username.github.io/repository-name/
-```
+- Source: `Deploy from a branch`
+- Branch: `master`
+- Folder: `/root`
 
-If you later buy a custom domain, GitHub Pages can use it, but a paid domain is optional.
+After changes are pushed to the publishing branch, GitHub Pages may take several minutes to update.
 
-## Generated Image
+## Maintenance Notes
 
-The hero image was generated for this project using the built-in image generation tool and saved in the workspace at:
+When updating the website:
 
-```text
-assets/molecular-evolution-hero.png
-```
+- Keep `index.html` in the repository root.
+- Keep publication links DOI-based where possible.
+- Use original or properly licensed figures and media.
+- Add new lab members, publications, software, and datasets as the group grows.
+- Check both desktop and mobile layouts after major edits.
 
-Publication figure panels on the website are original schematic summaries made for the site. They are not copied from journal figures.
+## Content
+
+The publication figure panels used on the homepage are original schematic summaries prepared for web presentation. They are not reproductions of published journal figures.
