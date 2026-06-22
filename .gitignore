@@ -4,3 +4,13 @@ WhatsApp Image *.jpeg
 final_pic.jpeg
 .DS_Store
 assets/.DS_Store
+tmp/
+CV/pdfs/
+cv/pdfs/
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.xdv
+*.synctex.gz

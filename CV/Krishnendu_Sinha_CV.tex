@@ -1,0 +1,139 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper,margin=0.72in]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+
+\definecolor{navy}{HTML}{07141B}
+\definecolor{blue}{HTML}{345C72}
+\definecolor{gold}{HTML}{A77D27}
+\definecolor{softgray}{HTML}{4B5563}
+\definecolor{linegray}{HTML}{D8D3C8}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=blue
+}
+
+\pagestyle{plain}
+\sloppy
+\emergencystretch=2em
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist[itemize]{leftmargin=1.25em, itemsep=2pt, topsep=2pt}
+\setlist[enumerate]{leftmargin=1.45em, itemsep=4pt, topsep=3pt}
+
+\newcommand{\cvsection}[1]{%
+  \par\addvspace{1.0em}%
+  \begingroup
+    \dimen0=\pagegoal
+    \advance\dimen0 by -\pagetotal
+    \ifdim\dimen0<6\baselineskip\newpage\fi
+  \endgroup
+  {\large\bfseries\sffamily\color{navy}#1}\par\nobreak
+  \vspace{0.15em}\nobreak
+  \textcolor{linegray}{\rule{\textwidth}{0.4pt}}\par\nobreak
+  \vspace{0.35em}\nobreak
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcommand{\cvdate}[1]{\textcolor{softgray}{\sffamily #1}}
+\newcommand{\cvlink}[2]{\href{#1}{#2}}
+\newcommand{\pubdoi}[1]{\href{https://doi.org/#1}{\nolinkurl{doi:#1}}}
+\newcommand{\pubitem}[4]{%
+  \item #1. \textit{#2}. #3. \pubdoi{#4}.%
+}
+
+\begin{document}
+
+{\Huge \textbf{Krishnendu Sinha}}\\[-1pt]
+{\Large Associate Professor of Zoology}\\[4pt]
+Department of Zoology, Siksha Bhavana, Visva-Bharati, Santiniketan-731235, India
+
+\vspace{6pt}
+\begin{tabularx}{\textwidth}{@{}>{\sffamily\color{softgray}}l L@{}}
+Email & \cvlink{mailto:dr.krishnendusinha@gmail.com}{dr.krishnendusinha@gmail.com}\\
+ORCID & \cvlink{https://orcid.org/0000-0001-9590-3875}{0000-0001-9590-3875}\\
+Google Scholar & \cvlink{https://scholar.google.com/citations?user=ZEI-IzMAAAAJ}{scholar.google.com/citations?user=ZEI-IzMAAAAJ}\\
+Scopus & Author ID: \cvlink{http://www.scopus.com/inward/authorDetails.url?authorID=55612440000\&partnerID=MN8TOARS}{55612440000}\\
+Lab website & \cvlink{https://sinhakrishnendu.github.io/Lab_website/}{Sinha Molecular Evolution Group}\\
+Last updated & 23 June 2026\\
+\end{tabularx}
+
+\cvsection{Professional Profile}
+Molecular evolution and computational bioinformatics researcher working at the interface of
+sequence analysis, adaptive molecular evolution, phylogenetics, protein evolution, and
+reproducible computational workflows. Current research emphasizes learned scoring for
+multiple sequence alignment, codon-aware analysis, episodic selection, robustness-aware
+evolutionary inference, and interpretable computational biology.
+
+\cvsection{Academic Appointments}
+\begin{tabularx}{\textwidth}{@{}p{0.18\textwidth} L@{}}
+\cvdate{2026--present} & \textbf{Associate Professor of Zoology}, Department of Zoology, Siksha Bhavana, Visva-Bharati, Santiniketan.\\
+\cvdate{2015--2026} & \textbf{West Bengal Education Service}, Jhargram Raj College, Jhargram, West Bengal.\\
+\end{tabularx}
+
+\cvsection{Education}
+\begin{tabularx}{\textwidth}{@{}p{0.18\textwidth} L@{}}
+\cvdate{2011--2017} & \textbf{Ph.D. in Molecular Medicine}, Bose Institute, Kolkata.\\
+\cvdate{2009--2011} & \textbf{M.Sc.}, University of Calcutta, Kolkata.\\
+\cvdate{2006--2009} & \textbf{B.Sc.}, Presidency College, Kolkata.\\
+\end{tabularx}
+
+\cvsection{Research Interests}
+\begin{itemize}
+  \item Molecular evolution, adaptive selection, and branch-site evolutionary inference.
+  \item Multiple sequence alignment, codon-aware alignment, and sequence-analysis methods.
+  \item Protein evolution, structural interpretation of selection signals, and molecular function.
+  \item Reproducible bioinformatics workflows, robustness summaries, and sensitivity-aware interpretation.
+  \item Computational toxicology, gut microbiome signals, and neurodegeneration-associated molecular data analysis.
+\end{itemize}
+
+\cvsection{Software and Computational Resources}
+\begin{itemize}
+  \item \textbf{BABAPPAlign}: progressive multiple sequence alignment engine using learned residue-level scoring over fixed protein-language-model embeddings, with exact affine-gap dynamic programming and codon-aware alignment mode. Published in \textit{Bioinformatics}.
+  \item \textbf{BABAPPASnake}: workflow for orthogroup-centered episodic selection analysis with multi-engine alignment pathways, phylogenetic inference, branch-site follow-up testing, and robustness-aware summaries.
+\end{itemize}
+
+\cvsection{Publications and Scholarly Outputs}
+\begin{enumerate}[label={[\arabic*]}]
+  \pubitem{Lineage-specific selection signals in the Growth arrest-specific protein 8 (GAS8) domain protein of Trypanosoma melophagium}{Scientific Reports}{2026}{10.1038/s41598-026-56233-x}
+  \pubitem{Curli Carrier Burden: a quantitative trait-level microbiome index for amyloidogenic bacterial signals in Parkinson's disease gut metagenomes}{Scholarly output}{2026}{10.64898/2026.05.25.727557}
+  \pubitem{NeuroFate: endpoint-locked transcriptomic axis scoring for neurodegeneration risk research}{Scholarly output}{2026}{10.64898/2026.05.23.727380}
+  \pubitem{BABAPPAlign: A Multiple Sequence Alignment Engine with a Learned Residue-Level Scoring Function}{Bioinformatics}{2026}{10.1093/bioinformatics/btag189}
+  \pubitem{Episodic positive selection structurally stabilizes the Arabidopsis CONSTANS-like gene COL5 indicating adaptive evolution}{Scientific Reports}{2026}{10.1038/s41598-025-34129-6}
+  \pubitem{BABAPPASnake: a workflow for episodic selection analysis with robustness-aware summaries}{bioRxiv}{2025/2026 versioned preprint}{10.1101/2025.04.27.650835}
+  \pubitem{Curli protein: A potential contributor to alpha-synucleopathy in Parkinson's disease}{Translational Medicine of Aging}{2025}{10.1016/j.tma.2025.02.002}
+  \pubitem{Selection on synonymous codon usage in soybean (Glycine max) WRKY genes}{Scientific Reports}{2024}{10.1038/s41598-024-77156-5}
+  \pubitem{Pesticides and the Gut Microbiota: Implications for Parkinson's Disease}{Chemical Research in Toxicology}{2024}{10.1021/acs.chemrestox.4c00057}
+  \pubitem{A Review on the Recent Applications of Deep Learning in Predictive Drug Toxicological Studies}{Chemical Research in Toxicology}{2023}{10.1021/acs.chemrestox.2c00375}
+  \pubitem{Machine Learning in Drug Metabolism Study}{Current Drug Metabolism}{2022}{10.2174/1389200224666221227094144}
+  \pubitem{Lupeol alters viability of SK-RC-45 (Renal cell carcinoma cell line) by modulating its mitochondrial dynamics}{Heliyon}{2019}{10.1016/j.heliyon.2019.e02107}
+  \pubitem{Sulphur dioxide ameliorates colitis related pathophysiology and inflammation}{Toxicology}{2019}{10.1016/j.tox.2018.11.010}
+  \pubitem{Phytochemicals and human health}{Functional Food and Human Health}{2018}{10.1007/978-981-13-1123-9_10}
+  \pubitem{Unfolding the mechanism of cisplatin induced pathophysiology in spleen and its amelioration by carnosine}{Chemico-Biological Interactions}{2018}{10.1016/j.cbi.2017.11.019}
+  \pubitem{Beneficial role of antioxidant molecules with therapeutic potential in cardiac disease}{Cardioprotective Natural Products: Promises and Hopes}{2017}{10.1142/9789813231160_0007}
+  \pubitem{Formalin in fish trading: An inefficient practice for sustaining fish quality}{Archives of Polish Fisheries}{2017}{10.1515/aopf-2017-0005}
+  \pubitem{Unfolding the mechanism of proteases in pathophysiology of gastrointestinal diseases}{Pathophysiological Aspects of Proteases}{2017}{10.1007/978-981-10-6141-7_24}
+  \pubitem{Morin and its role in chronic diseases}{Advances in Experimental Medicine and Biology}{2016}{10.1007/978-3-319-41334-1_19}
+  \pubitem{Taurine protects cisplatin induced cardiotoxicity by modulating inflammatory and endoplasmic reticulum stress responses}{BioFactors}{2016}{10.1002/biof.1301}
+  \pubitem{Morin protects gastric mucosa from nonsteroidal anti-inflammatory drug, indomethacin induced inflammatory damage and apoptosis by modulating NF-kB pathway}{Biochimica et Biophysica Acta - General Subjects}{2015}{10.1016/j.bbagen.2015.01.008}
+  \pubitem{Cadmium (Cd\textsuperscript{2+}) exposure differentially elicits both cell proliferation and cell death related responses in SK-RC-45}{Toxicology in Vitro}{2014}{10.1016/j.tiv.2013.11.011}
+  \pubitem{Cytochrome P450s: Mechanisms and biological implications in drug metabolism and its interaction with oxidative stress}{Current Drug Metabolism}{2014}{10.2174/1389200215666141125121659}
+  \pubitem{An update on oxidative stress-mediated organ pathophysiology}{Food and Chemical Toxicology}{2013}{10.1016/j.fct.2013.09.026}
+  \pubitem{Oxidative stress: The mitochondria-dependent and mitochondria-independent pathways of apoptosis}{Archives of Toxicology}{2013}{10.1007/s00204-013-1034-4}
+\end{enumerate}
+
+\cvsection{Research Identity and Profiles}
+\begin{itemize}
+  \item ORCID: \cvlink{https://orcid.org/0000-0001-9590-3875}{0000-0001-9590-3875}
+  \item Google Scholar: \cvlink{https://scholar.google.com/citations?user=ZEI-IzMAAAAJ}{ZEI-IzMAAAAJ}
+  \item Scopus Author ID: \cvlink{http://www.scopus.com/inward/authorDetails.url?authorID=55612440000\&partnerID=MN8TOARS}{55612440000}
+  \item Lab website: \cvlink{https://sinhakrishnendu.github.io/Lab_website/}{Sinha Molecular Evolution Group}
+\end{itemize}
+
+\end{document}
