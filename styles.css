@@ -680,12 +680,7 @@ h3 {
   flex: 0 0 184px;
   width: 184px;
   margin: 0;
-  padding: 10px;
-  border: 1px solid rgba(17, 24, 39, 0.14);
-  border-radius: 4px;
-  background:
-    linear-gradient(135deg, #d7dbe0, #eef0f2 44%, #c8ced5),
-    #d9dde2;
+  background: transparent;
 }
 
 .person-photo img {
@@ -693,7 +688,8 @@ h3 {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center top;
-  border-radius: 4px;
+  border: 0;
+  border-radius: 0;
   background: transparent;
 }
 
