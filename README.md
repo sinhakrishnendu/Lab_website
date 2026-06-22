@@ -1,6 +1,6 @@
 # Sinha Molecular Evolution Group
 
-Official website repository for the Sinha Molecular Evolution Group, Department of Zoology, Siksha Bhavana, Visva-Bharati University.
+Official website repository for the Sinha Molecular Evolution Group, Department of Zoology, Siksha Bhavana, Visva-Bharati.
 
 The website presents the group's research program in molecular evolution, adaptive selection, protein evolution, phylogenetics, and computational bioinformatics. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
 
@@ -73,7 +73,7 @@ When updating the website:
 - Keep `index.html` in the repository root.
 - Keep publication links DOI-based where possible.
 - Use original or properly licensed figures and media.
-- Use university marks, seals, and logos only when the appropriate institutional permission or license is available.
+- Use institutional marks, seals, and logos only when the appropriate permission or license is available.
 - Add new group members, publications, software, and datasets as the group grows.
 - Check both desktop and mobile layouts after major edits.
 
@@ -81,4 +81,4 @@ When updating the website:
 
 The logo and publication figure panels used on the homepage are original schematic summaries prepared for web presentation. They are not reproductions of published journal figures.
 
-The website uses a textual Visva-Bharati University affiliation mark. The official university seal or logo is not bundled in this repository unless separately authorized.
+The website uses a textual Visva-Bharati affiliation mark. The official Visva-Bharati seal or logo is not bundled in this repository unless separately authorized.
