@@ -765,6 +765,21 @@ h3 {
   margin-top: 20px;
 }
 
+.text-action {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 18px;
+  border-bottom: 2px solid var(--gold);
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.text-action:hover,
+.text-action:focus-visible {
+  color: var(--crimson);
+}
+
 .collaborator-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -805,7 +820,7 @@ h3 {
 
 .join-cards {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 18px;
 }
 
@@ -815,6 +830,10 @@ h3 {
 }
 
 .join-card:first-child {
+  border-top: 5px solid var(--crimson);
+}
+
+.join-card:nth-child(2) {
   border-top: 5px solid var(--green);
 }
 
