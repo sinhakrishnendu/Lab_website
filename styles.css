@@ -765,21 +765,6 @@ h3 {
   margin-top: 20px;
 }
 
-.text-action {
-  min-height: 42px;
-  display: inline-flex;
-  align-items: center;
-  margin-top: 18px;
-  border-bottom: 2px solid var(--gold);
-  color: var(--navy);
-  font-weight: 800;
-}
-
-.text-action:hover,
-.text-action:focus-visible {
-  color: var(--crimson);
-}
-
 .collaborator-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -827,6 +812,11 @@ h3 {
 .join-card {
   min-height: 210px;
   padding: 28px;
+}
+
+.join-card .text-link {
+  display: inline-block;
+  margin-top: 18px;
 }
 
 .join-card:first-child {
