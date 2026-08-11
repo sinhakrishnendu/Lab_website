@@ -2,7 +2,7 @@
 
 Official website repository for the Sinha Computational Biology Group, Department of Zoology, Siksha Bhavana, Visva-Bharati.
 
-The website presents the group's research program in molecular evolution, adaptive selection, protein evolution, phylogenetics, and computational bioinformatics. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
+The website presents the group's research in computational biology, context-aware sequence alignment, molecular evolution, phylogenetics, ancestral reconstruction, and reproducible scientific software. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
 
 ## Website
 
@@ -34,7 +34,7 @@ Scholarly profiles:
 
 `index.html` contains the page content, publication area, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` fetches public ORCID works at page load, ranks the selected-publication tiles by venue strength, topical relevance, and recency, and falls back to a curated data list if the profile API is unavailable. It also controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
 
-The active homepage background is `assets/sinha-lab-research-background.png`, an original software-centered visual inspired by BABAPPAlign and BABAPPASnake: multiple sequence alignment blocks, learned residue-level scoring, workflow orchestration, and robustness-summary motifs.
+The active homepage background is `assets/sinha-lab-research-background.png`, a software-centered visual inspired by BABAPPAlign and BABAPPASnake: multiple sequence alignment blocks, learned residue-level scoring, workflow orchestration, and robustness-summary motifs. The site presents this artwork in a light scientific palette.
 
 The browser tab favicon is `assets/favicon.svg`, an original abstract alignment/workflow mark.
 

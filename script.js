@@ -20,14 +20,15 @@ const profilePublicationHighlights = [
   },
   {
     rank: 2,
-    figure: "workflow",
-    venue: "bioRxiv",
+    figure: "selection",
+    venue: "Scientific Reports",
     year: "2026",
-    title: "BABAPPASnake: a workflow for episodic selection analysis with robustness-aware summaries",
+    title:
+      "Episodic positive selection structurally stabilizes the Arabidopsis CONSTANS-like gene COL5 indicating adaptive evolution",
     summary:
-      "Presents a reproducible workflow for orthogroup-centered episodic selection analysis, integrating alignment pathways, phylogenetic inference, branch-site testing, and robustness summaries.",
-    doi: "10.1101/2025.04.27.650835",
-    href: "https://doi.org/10.1101/2025.04.27.650835",
+      "Combines phylogenomic analysis, codon-based selection tests, ancestral reconstruction, Rosetta calculations, and molecular dynamics to examine the structural consequences of derived COL5 residues.",
+    doi: "10.1038/s41598-025-34129-6",
+    href: "https://doi.org/10.1038/s41598-025-34129-6",
   },
   {
     rank: 3,
@@ -35,11 +36,11 @@ const profilePublicationHighlights = [
     venue: "Scientific Reports",
     year: "2026",
     title:
-      "Episodic positive selection structurally stabilizes the Arabidopsis CONSTANS-like gene COL5 indicating adaptive evolution",
+      "Lineage-specific selection signals in the Growth arrest-specific protein 8 (GAS8) domain protein of Trypanosoma melophagium",
     summary:
-      "Links episodic positive selection in a plant light-signaling gene to structural stabilization, connecting molecular evolution signals with protein-level interpretation.",
-    doi: "10.1038/s41598-025-34129-6",
-    href: "https://doi.org/10.1038/s41598-025-34129-6",
+      "Uses maximum-likelihood phylogenetics, codon-based tests, ancestral reconstruction, and Rosetta estimates to report modest, method-dependent support for lineage-specific change in a conserved cytoskeletal protein.",
+    doi: "10.1038/s41598-026-56233-x",
+    href: "https://doi.org/10.1038/s41598-026-56233-x",
   },
 ];
 
@@ -55,7 +56,7 @@ const venueImpactScores = [
   ["toxicology", 82],
   ["current drug metabolism", 78],
   ["translational medicine of aging", 76],
-  ["biorxiv", 72],
+  ["biorxiv", 36],
 ];
 
 const figureMarkup = {
@@ -196,7 +197,11 @@ const scorePublicationImpact = (work) => {
   doiScore += getDoiPreferenceScore(doi);
   if (doi.startsWith("10.1101/") && title.includes("babappa")) doiScore += 8;
 
-  return venueScore + recencyScore + topicScore + doiScore;
+  const publicationType = String(work.type || "").toLowerCase();
+  const preprintPenalty =
+    publicationType.includes("preprint") || doi.startsWith("10.1101/") ? 24 : 0;
+
+  return venueScore + recencyScore + topicScore + doiScore - preprintPenalty;
 };
 
 const canonicalPublicationTitle = (title) =>
@@ -248,6 +253,7 @@ const normalizeOrcidWork = (summary) => {
     title: curatedWork?.title || title,
     doi: curatedWork?.doi || doi,
     href: curatedWork?.href || `https://doi.org/${doi}`,
+    type: summary.type || "",
   };
 
   work.summary = inferPublicationSummary(work);
