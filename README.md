@@ -34,7 +34,7 @@ Scholarly profiles:
 
 `index.html` contains the page content, publication area, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` fetches public ORCID works at page load, ranks the selected-publication tiles by venue strength, topical relevance, and recency, and falls back to a curated data list if the profile API is unavailable. It also controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
 
-The active homepage background is `assets/sinha-lab-research-background.png`, a software-centered visual inspired by BABAPPAlign and BABAPPASnake: multiple sequence alignment blocks, learned residue-level scoring, workflow orchestration, and robustness-summary motifs. The site presents this artwork in a light scientific palette.
+The active homepage background is `assets/sinha-lab-research-background.png`, a software-centered visual inspired by BABAPPAlign and BABAPPASnake: multiple sequence alignment blocks, learned residue-level scoring, workflow orchestration, and robustness-summary motifs. The site presents this artwork in a light gerua-led scientific palette aligned with the visual character of Visva-Bharati.
 
 The browser tab favicon is `assets/favicon.svg`, an original abstract alignment/workflow mark.
 

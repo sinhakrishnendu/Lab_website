@@ -2,21 +2,21 @@
   --ink: #163344;
   --ink-soft: #48616d;
   --muted: #6d7f86;
-  --paper: #f7fbfa;
+  --paper: #fffaf7;
   --paper-blue: #eef5fb;
-  --paper-mint: #eaf7f4;
+  --paper-gerua: #fff0e5;
   --paper-sun: #fff7df;
   --white: #ffffff;
-  --line: #cfe0dc;
+  --line: #ead7ca;
   --line-blue: #cedceb;
-  --teal: #007f75;
-  --teal-dark: #075e5a;
+  --gerua: #b24f24;
+  --gerua-dark: #74351e;
   --blue: #245aa7;
-  --coral: #bd514c;
-  --gold: #b87a00;
+  --coral: #b33f5b;
+  --gold: #a86b00;
   --sun: #ffd166;
   --navy: #153b4a;
-  --shadow: 0 18px 48px rgba(31, 70, 83, 0.1);
+  --shadow: 0 18px 48px rgba(92, 61, 42, 0.1);
   --max-width: 1180px;
 }
 
@@ -138,7 +138,7 @@ section[id] {
 }
 
 .institution-bar {
-  background: var(--teal-dark);
+  background: var(--gerua-dark);
   color: rgba(255, 255, 255, 0.92);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   font-family: Georgia, "Times New Roman", serif;
@@ -232,8 +232,8 @@ section[id] {
 
 .nav-links a:hover,
 .nav-links a.is-active {
-  background: var(--paper-mint);
-  color: var(--teal-dark);
+  background: var(--paper-gerua);
+  color: var(--gerua-dark);
 }
 
 .nav-toggle {
@@ -261,7 +261,7 @@ section[id] {
   display: grid;
   align-items: center;
   overflow: hidden;
-  background: #f2faf8;
+  background: #fff6ef;
 }
 
 .hero-media,
@@ -276,13 +276,13 @@ section[id] {
   object-fit: cover;
   object-position: center;
   opacity: 0.27;
-  filter: saturate(1.45) brightness(1.25);
+  filter: grayscale(1) sepia(0.78) saturate(1.55) hue-rotate(335deg) brightness(1.28);
 }
 
 .hero-overlay {
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.94) 42%, rgba(247, 251, 250, 0.7) 68%, rgba(238, 247, 245, 0.46) 100%),
-    linear-gradient(0deg, rgba(234, 247, 244, 0.76) 0%, rgba(255, 255, 255, 0.18) 54%, rgba(255, 255, 255, 0.74) 100%);
+    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.94) 42%, rgba(255, 250, 247, 0.7) 68%, rgba(255, 238, 226, 0.48) 100%),
+    linear-gradient(0deg, rgba(255, 237, 222, 0.76) 0%, rgba(255, 255, 255, 0.18) 54%, rgba(255, 255, 255, 0.74) 100%);
 }
 
 .hero-content {
@@ -298,7 +298,7 @@ section[id] {
 .role,
 .journal,
 .book-meta {
-  color: var(--teal);
+  color: var(--gerua);
   font-size: 0.76rem;
   font-weight: 850;
   letter-spacing: 0.09em;
@@ -353,7 +353,7 @@ section[id] {
 }
 
 .button.primary {
-  background: var(--teal);
+  background: var(--gerua);
   color: var(--white);
 }
 
@@ -383,7 +383,7 @@ a:focus-visible {
 
 .intro-band {
   border-block: 1px solid var(--line);
-  background: var(--paper-mint);
+  background: var(--paper-gerua);
 }
 
 .intro-grid {
@@ -396,7 +396,7 @@ a:focus-visible {
 
 .intro-grid > div {
   padding-left: 22px;
-  border-left: 5px solid var(--teal);
+  border-left: 5px solid var(--gerua);
 }
 
 .intro-grid h2 {
@@ -466,7 +466,7 @@ a:focus-visible {
 .theme-card {
   min-height: 255px;
   padding: 30px 30px 28px 34px;
-  border-left: 5px solid var(--teal);
+  border-left: 5px solid var(--gerua);
 }
 
 .theme-card:nth-child(2) {
@@ -484,7 +484,7 @@ a:focus-visible {
 .theme-number {
   display: inline-block;
   margin-bottom: 28px;
-  color: var(--teal);
+  color: var(--gerua);
   font-size: 0.82rem;
   font-weight: 900;
 }
@@ -533,7 +533,7 @@ a:focus-visible {
 }
 
 .feature-publication {
-  border-top: 4px solid var(--teal);
+  border-top: 4px solid var(--gerua);
 }
 
 .paper-figure {
@@ -580,14 +580,14 @@ a:focus-visible {
   gap: 8px;
   align-content: center;
   padding: 44px 28px;
-  background: var(--paper-mint);
+  background: var(--paper-gerua);
 }
 
 .alignment-figure span {
   height: 42px;
-  border: 1px solid rgba(0, 127, 117, 0.17);
+  border: 1px solid rgba(178, 79, 36, 0.17);
   border-radius: 3px;
-  background: rgba(0, 127, 117, 0.14);
+  background: rgba(178, 79, 36, 0.14);
 }
 
 .alignment-figure span:nth-child(2n) {
@@ -700,8 +700,8 @@ a:focus-visible {
 .workflow-figure .node-model {
   top: 78px;
   left: 61%;
-  border-color: rgba(0, 127, 117, 0.42);
-  background: rgba(0, 127, 117, 0.12);
+  border-color: rgba(178, 79, 36, 0.42);
+  background: rgba(178, 79, 36, 0.12);
 }
 
 .workflow-figure .node-summary {
@@ -777,7 +777,7 @@ a:focus-visible {
 }
 
 .book-card:nth-child(2) {
-  border-top-color: var(--teal);
+  border-top-color: var(--gerua);
 }
 
 .book-card:nth-child(3) {
@@ -790,7 +790,7 @@ a:focus-visible {
   margin: 0;
   place-items: center;
   border-bottom: 1px solid var(--line);
-  background: var(--paper-mint);
+  background: var(--paper-gerua);
 }
 
 .book-card:nth-child(2) .book-cover {
@@ -938,7 +938,7 @@ a:focus-visible {
 }
 
 .join-card:nth-child(2) {
-  border-top-color: var(--teal);
+  border-top-color: var(--gerua);
 }
 
 .join-card:nth-child(3) {
@@ -958,7 +958,7 @@ a:focus-visible {
 
 .contact-section {
   padding: 86px 0;
-  background: var(--teal-dark);
+  background: var(--gerua-dark);
   color: var(--white);
 }
 
