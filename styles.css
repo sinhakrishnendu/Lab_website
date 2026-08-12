@@ -536,13 +536,49 @@ a:focus-visible {
   border-top: 4px solid var(--gerua);
 }
 
-.paper-figure {
+.publication-cover {
   position: relative;
-  min-height: 190px;
-  margin: 0;
-  overflow: hidden;
+  min-height: 340px;
+  display: grid;
+  padding: 24px 24px 38px;
+  place-items: center;
   border-bottom: 1px solid var(--line-blue);
-  background: #e9f4f6;
+  background: #f3f0eb;
+}
+
+.publication-cover img {
+  width: auto;
+  max-width: 100%;
+  height: 278px;
+  object-fit: contain;
+  box-shadow: 0 14px 32px rgba(22, 51, 68, 0.18);
+}
+
+.publication-cover > span {
+  position: absolute;
+  right: 18px;
+  bottom: 10px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.publication-cover-fallback {
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.65rem;
+  text-align: center;
+}
+
+.publication-cover-fallback > span {
+  position: static;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .publication-body {
@@ -572,178 +608,6 @@ a:focus-visible {
   display: inline-block;
   margin-top: 18px;
   overflow-wrap: anywhere;
-}
-
-.alignment-figure {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 8px;
-  align-content: center;
-  padding: 44px 28px;
-  background: var(--paper-gerua);
-}
-
-.alignment-figure span {
-  height: 42px;
-  border: 1px solid rgba(178, 79, 36, 0.17);
-  border-radius: 3px;
-  background: rgba(178, 79, 36, 0.14);
-}
-
-.alignment-figure span:nth-child(2n) {
-  background: rgba(255, 209, 102, 0.62);
-}
-
-.alignment-figure span:nth-child(3n) {
-  background: rgba(36, 90, 167, 0.2);
-}
-
-.selection-figure {
-  background: var(--paper-sun);
-}
-
-.selection-figure .selection-track,
-.selection-figure .pulse,
-.workflow-figure span {
-  position: absolute;
-  display: block;
-}
-
-.selection-figure .selection-track {
-  left: 11%;
-  right: 11%;
-  height: 10px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(189, 81, 76, 0.12), rgba(189, 81, 76, 0.68), rgba(36, 90, 167, 0.18));
-}
-
-.selection-figure .track-one {
-  top: 58px;
-}
-
-.selection-figure .track-two {
-  top: 92px;
-  opacity: 0.72;
-}
-
-.selection-figure .track-three {
-  top: 126px;
-  opacity: 0.54;
-}
-
-.selection-figure .pulse {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--coral);
-  box-shadow: 0 0 0 8px rgba(189, 81, 76, 0.14);
-}
-
-.selection-figure .pulse-one {
-  top: 55px;
-  left: 46%;
-}
-
-.selection-figure .pulse-two {
-  top: 123px;
-  left: 66%;
-}
-
-.workflow-figure {
-  background: var(--paper-blue);
-}
-
-.workflow-figure .workflow-node {
-  width: 18%;
-  min-width: 48px;
-  max-width: 74px;
-  height: 32px;
-  border: 1px solid rgba(36, 90, 167, 0.34);
-  border-radius: 5px;
-  background: rgba(36, 90, 167, 0.12);
-}
-
-.workflow-figure .workflow-node::before,
-.workflow-figure .workflow-node::after {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  height: 2px;
-  border-radius: 999px;
-  background: rgba(36, 90, 167, 0.26);
-  content: "";
-}
-
-.workflow-figure .workflow-node::before {
-  top: 10px;
-}
-
-.workflow-figure .workflow-node::after {
-  bottom: 10px;
-}
-
-.workflow-figure .node-input {
-  top: 78px;
-  left: 6%;
-}
-
-.workflow-figure .node-align-a {
-  top: 42px;
-  left: 34%;
-}
-
-.workflow-figure .node-align-b {
-  top: 114px;
-  left: 34%;
-}
-
-.workflow-figure .node-model {
-  top: 78px;
-  left: 61%;
-  border-color: rgba(178, 79, 36, 0.42);
-  background: rgba(178, 79, 36, 0.12);
-}
-
-.workflow-figure .node-summary {
-  top: 78px;
-  right: 4%;
-  width: 15%;
-  border-color: rgba(189, 81, 76, 0.42);
-  background: rgba(189, 81, 76, 0.12);
-}
-
-.workflow-figure .workflow-edge {
-  height: 2px;
-  transform-origin: left center;
-  background: rgba(36, 90, 167, 0.28);
-}
-
-.workflow-figure .edge-one {
-  top: 78px;
-  left: 23%;
-  width: 16%;
-  transform: rotate(-22deg);
-}
-
-.workflow-figure .edge-two {
-  top: 110px;
-  left: 23%;
-  width: 16%;
-  transform: rotate(22deg);
-}
-
-.workflow-figure .edge-three {
-  top: 58px;
-  left: 50%;
-  width: 16%;
-  transform: rotate(20deg);
-}
-
-.workflow-figure .edge-four {
-  top: 130px;
-  left: 50%;
-  width: 16%;
-  transform: rotate(-20deg);
 }
 
 .profile-links {
@@ -1259,13 +1123,12 @@ a:focus-visible {
     display: grid;
   }
 
-  .paper-figure {
-    min-height: 166px;
+  .publication-cover {
+    min-height: 320px;
   }
 
-  .selection-figure .track-three,
-  .selection-figure .pulse-two {
-    transform: translateY(-18px);
+  .publication-cover img {
+    height: 258px;
   }
 
   .book-cover {

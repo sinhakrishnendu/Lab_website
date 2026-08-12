@@ -27,6 +27,9 @@ Scholarly profiles:
 ├── .nojekyll
 └── assets/
     ├── favicon.svg
+    ├── journals/
+    │   ├── bioinformatics-cover.jpg
+    │   └── scientific-reports-cover.jpg
     ├── molecular-evolution-hero.png
     ├── krishnendu-sinha.jpeg
     └── sinha-lab-research-background.png
@@ -39,6 +42,8 @@ The active homepage background is `assets/sinha-lab-research-background.png`, a 
 The browser tab favicon is `assets/favicon.svg`, an original abstract alignment/workflow mark.
 
 The principal investigator portrait is stored at `assets/krishnendu-sinha.jpeg`.
+
+The selected-publication cards use locally stored representative journal-cover thumbnails. Covers identify the journals and link directly to the corresponding articles; journal names without a prepared cover use a restrained text fallback.
 
 ## Local Preview
 

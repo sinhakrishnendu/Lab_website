@@ -9,7 +9,6 @@ const orcidWorksEndpoint = "https://pub.orcid.org/v3.0/0000-0001-9590-3875/works
 const profilePublicationHighlights = [
   {
     rank: 1,
-    figure: "alignment",
     venue: "Bioinformatics",
     year: "2026",
     title: "BABAPPAlign: a multiple sequence alignment engine with a learned residue-level scoring function",
@@ -20,7 +19,6 @@ const profilePublicationHighlights = [
   },
   {
     rank: 2,
-    figure: "selection",
     venue: "Scientific Reports",
     year: "2026",
     title:
@@ -32,7 +30,6 @@ const profilePublicationHighlights = [
   },
   {
     rank: 3,
-    figure: "selection",
     venue: "Scientific Reports",
     year: "2026",
     title:
@@ -59,35 +56,25 @@ const venueImpactScores = [
   ["biorxiv", 36],
 ];
 
-const figureMarkup = {
-  alignment: `
-    <figure class="paper-figure alignment-figure" aria-label="Schematic sequence alignment figure">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </figure>
-  `,
-  workflow: `
-    <figure class="paper-figure workflow-figure" aria-label="Schematic reproducible workflow figure">
-      <span class="workflow-node node-input"></span>
-      <span class="workflow-node node-align-a"></span>
-      <span class="workflow-node node-align-b"></span>
-      <span class="workflow-node node-model"></span>
-      <span class="workflow-node node-summary"></span>
-      <span class="workflow-edge edge-one"></span>
-      <span class="workflow-edge edge-two"></span>
-      <span class="workflow-edge edge-three"></span>
-      <span class="workflow-edge edge-four"></span>
-    </figure>
-  `,
-  selection: `
-    <figure class="paper-figure selection-figure" aria-label="Schematic adaptive-selection signal figure">
-      <span class="selection-track track-one"></span>
-      <span class="selection-track track-two"></span>
-      <span class="selection-track track-three"></span>
-      <span class="pulse pulse-one"></span>
-      <span class="pulse pulse-two"></span>
-    </figure>
-  `,
+const journalCovers = {
+  bioinformatics: {
+    src: "assets/journals/bioinformatics-cover.jpg",
+    alt: "Cover of the journal Bioinformatics",
+    width: 611,
+    height: 792,
+  },
+  "scientific reports": {
+    src: "assets/journals/scientific-reports-cover.jpg",
+    alt: "Cover of the journal Scientific Reports",
+    width: 684,
+    height: 900,
+  },
+};
+
+const getJournalCover = (venue) => {
+  const normalizedVenue = String(venue || "").toLowerCase();
+  const key = Object.keys(journalCovers).find((name) => normalizedVenue.includes(name));
+  return key ? journalCovers[key] : null;
 };
 
 const escapeHtml = (value) =>
@@ -150,17 +137,6 @@ const getCuratedPublication = (doi, title) => {
       normalizedTitle.includes(work.title.toLowerCase().slice(0, 32))
     );
   });
-};
-
-const inferPublicationFigure = (title) => {
-  const normalizedTitle = title.toLowerCase();
-  if (normalizedTitle.includes("workflow") || normalizedTitle.includes("pipeline") || normalizedTitle.includes("babappasnake")) {
-    return "workflow";
-  }
-  if (normalizedTitle.includes("alignment") || normalizedTitle.includes("babappalign")) {
-    return "alignment";
-  }
-  return "selection";
 };
 
 const inferPublicationSummary = (work) => {
@@ -247,7 +223,6 @@ const normalizeOrcidWork = (summary) => {
   const venue = summary["journal-title"]?.value || (doi.startsWith("10.1101/") ? "bioRxiv" : "Profile publication");
   const curatedWork = getCuratedPublication(doi, title);
   const work = {
-    figure: curatedWork?.figure || inferPublicationFigure(title),
     venue: curatedWork?.venue || venue,
     year: curatedWork?.year || year,
     title: curatedWork?.title || title,
@@ -276,6 +251,31 @@ const extractOrcidWorks = (data) => {
   return works;
 };
 
+const renderPublicationCover = (work) => {
+  const cover = getJournalCover(work.venue);
+
+  if (!cover) {
+    return `
+      <figure class="publication-cover publication-cover-fallback">
+        <span>${escapeHtml(work.venue)}</span>
+      </figure>
+    `;
+  }
+
+  return `
+    <a class="publication-cover" href="${escapeHtml(work.href)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(work.title)}">
+      <img
+        src="${escapeHtml(cover.src)}"
+        alt="${escapeHtml(cover.alt)}"
+        width="${cover.width}"
+        height="${cover.height}"
+        loading="lazy"
+      >
+      <span>Journal cover</span>
+    </a>
+  `;
+};
+
 const renderSelectedPublications = (publications = profilePublicationHighlights) => {
   if (!selectedPublicationsTarget) return;
 
@@ -292,7 +292,7 @@ const renderSelectedPublications = (publications = profilePublicationHighlights)
     .map(
       (work, index) => `
         <article class="publication-card${index === 0 ? " feature-publication" : ""}">
-          ${figureMarkup[work.figure] || figureMarkup.alignment}
+          ${renderPublicationCover(work)}
           <div class="publication-body">
             <p class="journal">${escapeHtml(work.venue)} · ${escapeHtml(work.year)}</p>
             <h3>${escapeHtml(work.title)}</h3>
