@@ -527,87 +527,12 @@ a:focus-visible {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.publication-card {
-  overflow: hidden;
-  border-color: var(--line-blue);
-}
-
-.feature-publication {
-  border-top: 4px solid var(--gerua);
-}
-
-.publication-cover {
-  position: relative;
-  min-height: 340px;
-  display: grid;
-  padding: 24px 24px 38px;
-  place-items: center;
-  border-bottom: 1px solid var(--line-blue);
-  background: #f3f0eb;
-}
-
-.publication-cover img {
-  width: auto;
-  max-width: 100%;
-  height: 278px;
-  object-fit: contain;
-  box-shadow: 0 14px 32px rgba(22, 51, 68, 0.18);
-}
-
-.publication-cover > span {
-  position: absolute;
-  right: 18px;
-  bottom: 10px;
-  color: var(--muted);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.publication-cover-fallback {
-  color: var(--ink);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.65rem;
-  text-align: center;
-}
-
-.publication-cover-fallback > span {
-  position: static;
-  color: inherit;
-  font-size: inherit;
-  font-weight: 500;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-.publication-body {
-  padding: 27px;
-}
-
-.publication-body h3 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.42rem;
-  font-weight: 500;
-}
-
-.journal {
-  margin-bottom: 12px;
-  color: var(--coral);
-}
-
 .text-link,
 .person-card a,
 .profile-links a,
 .contact-card a {
   color: var(--blue);
   font-weight: 800;
-}
-
-.publication-body .text-link {
-  display: inline-block;
-  margin-top: 18px;
-  overflow-wrap: anywhere;
 }
 
 .profile-links {
@@ -634,37 +559,45 @@ a:focus-visible {
   gap: 20px;
 }
 
+.publication-card,
 .book-card {
   overflow: hidden;
   padding: 0;
   border-top: 4px solid var(--blue);
 }
 
+.publication-card:nth-child(2),
 .book-card:nth-child(2) {
   border-top-color: var(--gerua);
 }
 
+.publication-card:nth-child(3),
 .book-card:nth-child(3) {
   border-top-color: var(--coral);
 }
 
+.publication-cover,
 .book-cover {
   min-height: 295px;
   display: grid;
   margin: 0;
+  padding: 18px;
   place-items: center;
   border-bottom: 1px solid var(--line);
   background: var(--paper-gerua);
 }
 
+.publication-card:nth-child(2) .publication-cover,
 .book-card:nth-child(2) .book-cover {
   background: var(--paper-blue);
 }
 
+.publication-card:nth-child(3) .publication-cover,
 .book-card:nth-child(3) .book-cover {
   background: var(--paper-sun);
 }
 
+.publication-cover img,
 .book-cover img {
   width: auto;
   max-width: min(70%, 220px);
@@ -673,10 +606,23 @@ a:focus-visible {
   box-shadow: 0 15px 34px rgba(22, 51, 68, 0.16);
 }
 
+.publication-cover-fallback {
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.65rem;
+  text-align: center;
+}
+
+.publication-cover-fallback > span {
+  font-weight: 500;
+}
+
+.publication-body,
 .book-body {
   padding: 27px;
 }
 
+.publication-card h3,
 .book-card h3 {
   margin-bottom: 8px;
   font-family: Georgia, "Times New Roman", serif;
@@ -684,6 +630,7 @@ a:focus-visible {
   font-weight: 500;
 }
 
+.publication-card .journal,
 .book-card .book-meta {
   margin-bottom: 12px;
   color: var(--coral);
@@ -700,9 +647,11 @@ a:focus-visible {
   font-size: 0.93rem;
 }
 
+.publication-card .text-link,
 .book-card .text-link {
   display: inline-block;
   margin-top: 18px;
+  overflow-wrap: anywhere;
 }
 
 .people-layout,
@@ -937,11 +886,13 @@ a:focus-visible {
     grid-column: 1 / -1;
   }
 
+  .publication-card:last-child,
   .book-card:last-child {
     display: grid;
     grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
   }
 
+  .publication-card:last-child .publication-cover,
   .book-card:last-child .book-cover {
     border-right: 1px solid var(--line);
     border-bottom: 0;
@@ -1046,10 +997,12 @@ a:focus-visible {
     grid-column: auto;
   }
 
+  .publication-card:last-child,
   .book-card:last-child {
     display: block;
   }
 
+  .publication-card:last-child .publication-cover,
   .book-card:last-child .book-cover {
     border-right: 0;
     border-bottom: 1px solid var(--line);
@@ -1123,14 +1076,7 @@ a:focus-visible {
     display: grid;
   }
 
-  .publication-cover {
-    min-height: 320px;
-  }
-
-  .publication-cover img {
-    height: 258px;
-  }
-
+  .publication-cover,
   .book-cover {
     min-height: 270px;
   }

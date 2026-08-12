@@ -271,7 +271,6 @@ const renderPublicationCover = (work) => {
         height="${cover.height}"
         loading="lazy"
       >
-      <span>Journal cover</span>
     </a>
   `;
 };
@@ -290,8 +289,8 @@ const renderSelectedPublications = (publications = profilePublicationHighlights)
 
   selectedPublicationsTarget.innerHTML = selectedWorks
     .map(
-      (work, index) => `
-        <article class="publication-card${index === 0 ? " feature-publication" : ""}">
+      (work) => `
+        <article class="publication-card">
           ${renderPublicationCover(work)}
           <div class="publication-body">
             <p class="journal">${escapeHtml(work.venue)} · ${escapeHtml(work.year)}</p>
