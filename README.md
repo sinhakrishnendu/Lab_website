@@ -1,6 +1,6 @@
-# Sinha Computational Biology Group
+# Sinha Molecular Evolution Group
 
-Official website repository for the Sinha Computational Biology Group, Department of Zoology, Siksha Bhavana, Visva-Bharati.
+Official website repository for the Sinha Molecular Evolution Group, Department of Zoology, Siksha Bhavana, Visva-Bharati.
 
 The website presents the group's research in computational biology, context-aware sequence alignment, molecular evolution, phylogenetics, ancestral reconstruction, and reproducible scientific software. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
 
