@@ -257,7 +257,7 @@ section[id] {
 
 .hero {
   position: relative;
-  height: clamp(590px, calc(100svh - 82px), 780px);
+  min-height: clamp(610px, calc(100svh - 96px), 750px);
   display: grid;
   align-items: center;
   overflow: hidden;
@@ -290,14 +290,13 @@ section[id] {
   z-index: 2;
   width: min(calc(100% - 40px), var(--max-width));
   margin: 0 auto;
-  padding: 138px 0 44px;
+  padding: 136px 0 44px;
 }
 
 .eyebrow,
 .section-kicker,
 .role,
-.journal,
-.book-meta {
+.journal {
   color: var(--gerua);
   font-size: 0.76rem;
   font-weight: 850;
@@ -366,12 +365,49 @@ section[id] {
 .button:hover,
 .text-link:hover,
 .card-link:hover,
+.latest-research:hover,
 .contact-card a:hover,
 .person-card a:hover,
 .site-footer a:hover,
 .profile-links a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.latest-research {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.45fr) minmax(0, 1.55fr) auto;
+  gap: 22px;
+  align-items: center;
+  padding-block: 22px;
+}
+
+.latest-band {
+  border-block: 1px solid var(--line);
+  background: var(--white);
+}
+
+.latest-label {
+  color: var(--gerua);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.latest-research strong {
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.12rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.latest-action {
+  color: var(--blue);
+  font-size: 0.88rem;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .button:focus-visible,
@@ -394,7 +430,7 @@ a:focus-visible {
   align-items: center;
 }
 
-.intro-grid > div {
+.intro-grid > div:first-child {
   padding-left: 22px;
   border-left: 5px solid var(--gerua);
 }
@@ -404,10 +440,35 @@ a:focus-visible {
   font-size: 2.7rem;
 }
 
-.intro-grid p:last-child {
+.identity-statement > p {
   margin-bottom: 0;
   color: var(--ink-soft);
   font-size: 1.06rem;
+}
+
+.identity-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 24px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid rgba(178, 79, 36, 0.24);
+  list-style: none;
+}
+
+.identity-pillars li {
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+}
+
+.identity-pillars span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--gerua);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 850;
 }
 
 .section {
@@ -419,7 +480,6 @@ a:focus-visible {
   background: var(--paper-blue);
 }
 
-#books,
 #join {
   background: #fbfdfd;
 }
@@ -454,7 +514,6 @@ a:focus-visible {
 .person-card,
 .collaborator-card,
 .publication-card,
-.book-card,
 .join-card,
 .contact-card {
   border: 1px solid var(--line);
@@ -464,7 +523,7 @@ a:focus-visible {
 }
 
 .theme-card {
-  min-height: 255px;
+  min-height: 290px;
   padding: 30px 30px 28px 34px;
   border-left: 5px solid var(--gerua);
 }
@@ -510,7 +569,6 @@ a:focus-visible {
 .theme-card p,
 .person-card p,
 .publication-card p,
-.book-card p,
 .join-card p,
 .contact-card p {
   color: var(--ink-soft);
@@ -521,6 +579,64 @@ a:focus-visible {
   margin-top: 16px;
   color: var(--blue);
   font-weight: 800;
+}
+
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.research-pathway {
+  margin-top: 52px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+
+.research-pathway ol {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.research-pathway li {
+  min-height: 138px;
+  padding: 4px 22px 8px;
+  border-left: 1px solid var(--line);
+}
+
+.research-pathway li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.research-pathway li > span {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--gerua);
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.research-pathway strong,
+.research-pathway small {
+  display: block;
+}
+
+.research-pathway strong {
+  margin-bottom: 7px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.04rem;
+  font-weight: 500;
+}
+
+.research-pathway small {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
 .publication-grid {
@@ -553,31 +669,21 @@ a:focus-visible {
   overflow-wrap: anywhere;
 }
 
-.book-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.publication-card,
-.book-card {
+.publication-card {
   overflow: hidden;
   padding: 0;
   border-top: 4px solid var(--blue);
 }
 
-.publication-card:nth-child(2),
-.book-card:nth-child(2) {
+.publication-card:nth-child(2) {
   border-top-color: var(--gerua);
 }
 
-.publication-card:nth-child(3),
-.book-card:nth-child(3) {
+.publication-card:nth-child(3) {
   border-top-color: var(--coral);
 }
 
-.publication-cover,
-.book-cover {
+.publication-cover {
   min-height: 295px;
   display: grid;
   margin: 0;
@@ -587,18 +693,15 @@ a:focus-visible {
   background: var(--paper-gerua);
 }
 
-.publication-card:nth-child(2) .publication-cover,
-.book-card:nth-child(2) .book-cover {
+.publication-card:nth-child(2) .publication-cover {
   background: var(--paper-blue);
 }
 
-.publication-card:nth-child(3) .publication-cover,
-.book-card:nth-child(3) .book-cover {
+.publication-card:nth-child(3) .publication-cover {
   background: var(--paper-sun);
 }
 
-.publication-cover img,
-.book-cover img {
+.publication-cover img {
   width: auto;
   max-width: min(70%, 220px);
   max-height: 260px;
@@ -607,6 +710,8 @@ a:focus-visible {
 }
 
 .publication-cover-fallback {
+  align-content: center;
+  gap: 7px;
   color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.65rem;
@@ -617,38 +722,32 @@ a:focus-visible {
   font-weight: 500;
 }
 
-.publication-body,
-.book-body {
+.publication-cover-fallback small {
+  color: var(--gerua);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.publication-body {
   padding: 27px;
 }
 
-.publication-card h3,
-.book-card h3 {
+.publication-card h3 {
   margin-bottom: 8px;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.68rem;
   font-weight: 500;
 }
 
-.publication-card .journal,
-.book-card .book-meta {
+.publication-card .journal {
   margin-bottom: 12px;
   color: var(--coral);
 }
 
-.book-card .book-subtitle {
-  margin-bottom: 16px;
-  color: var(--ink);
-  font-weight: 750;
-}
-
-.book-card .book-details {
-  margin-top: 16px;
-  font-size: 0.93rem;
-}
-
-.publication-card .text-link,
-.book-card .text-link {
+.publication-card .text-link {
   display: inline-block;
   margin-top: 18px;
   overflow-wrap: anywhere;
@@ -876,26 +975,32 @@ a:focus-visible {
     padding: 0 14px;
   }
 
-  .publication-grid,
-  .book-grid {
+  .publication-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .publication-card:last-child,
-  .book-card:last-child {
+  .publication-card:last-child {
     grid-column: 1 / -1;
   }
 
-  .publication-card:last-child,
-  .book-card:last-child {
+  .publication-card:last-child {
     display: grid;
     grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
   }
 
-  .publication-card:last-child .publication-cover,
-  .book-card:last-child .book-cover {
+  .publication-card:last-child .publication-cover {
     border-right: 1px solid var(--line);
     border-bottom: 0;
+  }
+
+  .research-pathway ol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 28px;
+  }
+
+  .research-pathway li:nth-child(4) {
+    padding-left: 0;
+    border-left: 0;
   }
 
   .people-layout,
@@ -949,7 +1054,7 @@ a:focus-visible {
   }
 
   .hero {
-    height: clamp(570px, calc(100svh - 70px), 720px);
+    min-height: calc(100svh - 90px);
   }
 
   .hero-content {
@@ -970,10 +1075,18 @@ a:focus-visible {
     font-size: 1.1rem;
   }
 
+  .latest-research {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .latest-action {
+    margin-top: 4px;
+  }
+
   .intro-grid,
   .card-grid.four,
   .publication-grid,
-  .book-grid,
   .collaborator-grid,
   .join-cards {
     grid-template-columns: 1fr;
@@ -992,20 +1105,34 @@ a:focus-visible {
     padding: 72px 0;
   }
 
-  .publication-card:last-child,
-  .book-card:last-child {
+  .publication-card:last-child {
     grid-column: auto;
   }
 
-  .publication-card:last-child,
-  .book-card:last-child {
+  .publication-card:last-child {
     display: block;
   }
 
-  .publication-card:last-child .publication-cover,
-  .book-card:last-child .book-cover {
+  .publication-card:last-child .publication-cover {
     border-right: 0;
     border-bottom: 1px solid var(--line);
+  }
+
+  .research-pathway ol {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+  }
+
+  .research-pathway li,
+  .research-pathway li:nth-child(4) {
+    min-height: 0;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .research-pathway li:first-child {
+    border-top: 0;
   }
 
   .person-card {
@@ -1038,11 +1165,12 @@ a:focus-visible {
   }
 
   .hero {
-    height: clamp(590px, calc(100svh - 44px), 700px);
+    min-height: calc(100svh - 80px);
   }
 
   .hero-content {
-    padding-top: 126px;
+    padding-top: 112px;
+    padding-bottom: 30px;
   }
 
   .hero-topics li {
@@ -1061,7 +1189,6 @@ a:focus-visible {
 
   .theme-card,
   .publication-body,
-  .book-body,
   .join-card,
   .collaborator-card,
   .contact-card {
@@ -1076,8 +1203,7 @@ a:focus-visible {
     display: grid;
   }
 
-  .publication-cover,
-  .book-cover {
+  .publication-cover {
     min-height: 270px;
   }
 

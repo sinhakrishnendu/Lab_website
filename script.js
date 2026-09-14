@@ -9,6 +9,18 @@ const orcidWorksEndpoint = "https://pub.orcid.org/v3.0/0000-0001-9590-3875/works
 const profilePublicationHighlights = [
   {
     rank: 1,
+    venue: "bioRxiv",
+    year: "2026",
+    title: "Evolutionary replay of duplicate-gene retention is structured by lineage and event",
+    summary:
+      "Tests whether ancestral gene-lineage identity predicts duplicate retention across independent whole-genome duplications, finding reproducible replay that remains shaped by lineage and event history.",
+    doi: "10.64898/2026.08.29.748011",
+    href: "https://doi.org/10.64898/2026.08.29.748011",
+    type: "preprint",
+    publishedAt: Date.UTC(2026, 8, 3),
+  },
+  {
+    rank: 2,
     venue: "Bioinformatics",
     year: "2026",
     title: "BABAPPAlign: a multiple sequence alignment engine with a learned residue-level scoring function",
@@ -16,9 +28,11 @@ const profilePublicationHighlights = [
       "Introduces a progressive MSA engine with a trained residue-level scorer, fixed protein-language-model embeddings, exact affine-gap dynamic programming, and codon-aware alignment.",
     doi: "10.1093/bioinformatics/btag189",
     href: "https://doi.org/10.1093/bioinformatics/btag189",
+    type: "journal-article",
+    publishedAt: Date.UTC(2026, 4, 3),
   },
   {
-    rank: 2,
+    rank: 3,
     venue: "Scientific Reports",
     year: "2026",
     title:
@@ -27,9 +41,11 @@ const profilePublicationHighlights = [
       "Combines phylogenomic analysis, codon-based selection tests, ancestral reconstruction, Rosetta calculations, and molecular dynamics to examine the structural consequences of derived COL5 residues.",
     doi: "10.1038/s41598-025-34129-6",
     href: "https://doi.org/10.1038/s41598-025-34129-6",
+    type: "journal-article",
+    publishedAt: Date.UTC(2026, 0, 3),
   },
   {
-    rank: 3,
+    rank: 4,
     venue: "Scientific Reports",
     year: "2026",
     title:
@@ -38,6 +54,8 @@ const profilePublicationHighlights = [
       "Uses maximum-likelihood phylogenetics, codon-based tests, ancestral reconstruction, and Rosetta estimates to report modest, method-dependent support for lineage-specific change in a conserved cytoskeletal protein.",
     doi: "10.1038/s41598-026-56233-x",
     href: "https://doi.org/10.1038/s41598-026-56233-x",
+    type: "journal-article",
+    publishedAt: Date.UTC(2026, 5, 9),
   },
 ];
 
@@ -110,8 +128,22 @@ const getDoiPreferenceScore = (doi) => {
   if (normalizedDoi.startsWith("10.1093/")) return 10;
   if (normalizedDoi.startsWith("10.1038/")) return 9;
   if (normalizedDoi.startsWith("10.1021/")) return 7;
-  if (normalizedDoi.startsWith("10.1101/")) return 4;
+  if (normalizedDoi.startsWith("10.1101/") || normalizedDoi.startsWith("10.64898/")) return 4;
   return 0;
+};
+
+const isPreprint = (work) => {
+  const publicationType = String(work.type || "").toLowerCase();
+  const venue = String(work.venue || "").toLowerCase();
+  const doi = normalizeDoi(work.doi);
+  return (
+    publicationType.includes("preprint") ||
+    venue.includes("biorxiv") ||
+    venue.includes("ecoevorxiv") ||
+    doi.startsWith("10.1101/") ||
+    doi.startsWith("10.64898/") ||
+    doi.startsWith("10.32942/")
+  );
 };
 
 const getOrcidDateValue = (summary) => {
@@ -153,6 +185,12 @@ const inferPublicationSummary = (work) => {
   if (normalizedTitle.includes("selection") || normalizedTitle.includes("codon") || normalizedTitle.includes("adaptive")) {
     return "Profile-listed molecular evolution study connecting sequence-level signals with biological interpretation.";
   }
+  if (normalizedTitle.includes("duplicate") || normalizedTitle.includes("genome evolution")) {
+    return "Profile-listed evolutionary genomics study examining the retention and loss of duplicated genes across lineages.";
+  }
+  if (normalizedTitle.includes("transcriptom") || normalizedTitle.includes("metagenom") || normalizedTitle.includes("microbiome")) {
+    return "Profile-listed computational omics study using explicit, reproducible biological summaries and guarded interpretation.";
+  }
   return "Profile-listed publication. See the DOI record and scholarly profiles for full bibliographic details.";
 };
 
@@ -167,15 +205,16 @@ const scorePublicationImpact = (work) => {
   if (title.includes("babappasnake") || title.includes("babappa")) topicScore += 66;
   if (title.includes("positive selection") || title.includes("adaptive evolution")) topicScore += 32;
   if (title.includes("codon") || title.includes("alignment") || title.includes("phylogen")) topicScore += 24;
+  if (title.includes("duplicate-gene") || title.includes("whole-genome duplication")) topicScore += 36;
+  if (title.includes("identifiability") || title.includes("evolutionary replay")) topicScore += 28;
+  if (title.includes("transcriptomic") || title.includes("metagenom")) topicScore += 18;
   if (title.includes("molecular") || title.includes("evolution")) topicScore += 10;
 
   let doiScore = 0;
   doiScore += getDoiPreferenceScore(doi);
   if (doi.startsWith("10.1101/") && title.includes("babappa")) doiScore += 8;
 
-  const publicationType = String(work.type || "").toLowerCase();
-  const preprintPenalty =
-    publicationType.includes("preprint") || doi.startsWith("10.1101/") ? 24 : 0;
+  const preprintPenalty = isPreprint(work) ? 24 : 0;
 
   return venueScore + recencyScore + topicScore + doiScore - preprintPenalty;
 };
@@ -220,7 +259,12 @@ const normalizeOrcidWork = (summary) => {
 
   const date = summary["publication-date"] || {};
   const year = date.year?.value || "";
-  const venue = summary["journal-title"]?.value || (doi.startsWith("10.1101/") ? "bioRxiv" : "Profile publication");
+  const type = summary.type || "";
+  const venue =
+    summary["journal-title"]?.value ||
+    (String(type).toLowerCase().includes("preprint") || doi.startsWith("10.1101/") || doi.startsWith("10.64898/")
+      ? "bioRxiv"
+      : "Scholarly output");
   const curatedWork = getCuratedPublication(doi, title);
   const work = {
     venue: curatedWork?.venue || venue,
@@ -228,7 +272,8 @@ const normalizeOrcidWork = (summary) => {
     title: curatedWork?.title || title,
     doi: curatedWork?.doi || doi,
     href: curatedWork?.href || `https://doi.org/${doi}`,
-    type: summary.type || "",
+    type: curatedWork?.type || type,
+    publishedAt: getOrcidDateValue(summary),
   };
 
   work.summary = inferPublicationSummary(work);
@@ -258,6 +303,7 @@ const renderPublicationCover = (work) => {
     return `
       <figure class="publication-cover publication-cover-fallback">
         <span>${escapeHtml(work.venue)}</span>
+        <small>${isPreprint(work) ? "Research preprint" : "Scholarly output"}</small>
       </figure>
     `;
   }
@@ -275,17 +321,41 @@ const renderPublicationCover = (work) => {
   `;
 };
 
+const selectPublicationHighlights = (publications) => {
+  const rankedFallback = publications.filter((work) => Number.isFinite(work.rank));
+  if (rankedFallback.length > 0) {
+    return [...rankedFallback].sort((a, b) => a.rank - b.rank).slice(0, 3);
+  }
+
+  const byImpact = [...publications].sort(
+    (a, b) =>
+      (b.score ?? 0) - (a.score ?? 0) ||
+      (b.publishedAt ?? 0) - (a.publishedAt ?? 0) ||
+      getPublicationYear(b) - getPublicationYear(a),
+  );
+  const newestPreprint = byImpact
+    .filter(isPreprint)
+    .sort((a, b) => (b.publishedAt ?? 0) - (a.publishedAt ?? 0))[0];
+  const leadingArticles = byImpact.filter((work) => !isPreprint(work)).slice(0, 2);
+  const selected = [newestPreprint, ...leadingArticles].filter(Boolean);
+
+  for (const work of byImpact) {
+    if (selected.length >= 3) break;
+    if (!selected.includes(work)) selected.push(work);
+  }
+
+  return selected.slice(0, 3);
+};
+
+const getPublicationMeta = (work) => {
+  const status = isPreprint(work) ? "Preprint" : "Peer-reviewed article";
+  return `${status} · ${work.venue} · ${work.year}`;
+};
+
 const renderSelectedPublications = (publications = profilePublicationHighlights) => {
   if (!selectedPublicationsTarget) return;
 
-  const selectedWorks = [...publications]
-    .sort((a, b) => {
-      const aRank = Number.isFinite(a.rank) ? a.rank : null;
-      const bRank = Number.isFinite(b.rank) ? b.rank : null;
-      if (aRank !== null || bRank !== null) return (aRank ?? 999) - (bRank ?? 999);
-      return (b.score ?? 0) - (a.score ?? 0) || getPublicationYear(b) - getPublicationYear(a);
-    })
-    .slice(0, 3);
+  const selectedWorks = selectPublicationHighlights(publications);
 
   selectedPublicationsTarget.innerHTML = selectedWorks
     .map(
@@ -293,7 +363,7 @@ const renderSelectedPublications = (publications = profilePublicationHighlights)
         <article class="publication-card">
           ${renderPublicationCover(work)}
           <div class="publication-body">
-            <p class="journal">${escapeHtml(work.venue)} · ${escapeHtml(work.year)}</p>
+            <p class="journal">${escapeHtml(getPublicationMeta(work))}</p>
             <h3>${escapeHtml(work.title)}</h3>
             <p>${escapeHtml(work.summary)}</p>
             <a class="text-link" href="${escapeHtml(work.href)}" target="_blank" rel="noreferrer">

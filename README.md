@@ -2,7 +2,7 @@
 
 Official website repository for the Sinha Molecular Evolution Group, Department of Zoology, Siksha Bhavana, Visva-Bharati.
 
-The website presents the group's research in computational biology, context-aware sequence alignment, molecular evolution, phylogenetics, ancestral reconstruction, and reproducible scientific software. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
+The website presents the group's current research identity across evolutionary genomics, duplicate-gene retention, molecular adaptation, statistical phylogenetics, context-aware sequence alignment, evidence-aware omics, and reproducible scientific software. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
 
 ## Website
 
@@ -35,7 +35,7 @@ Scholarly profiles:
     └── sinha-lab-research-background.png
 ```
 
-`index.html` contains the page content, publication area, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` fetches public ORCID works at page load, ranks the selected-publication tiles by venue strength, topical relevance, and recency, and falls back to a curated data list if the profile API is unavailable. It also controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
+`index.html` contains the research narrative, publication area, people, opportunities, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` fetches public ORCID works at page load, presents the newest preprint alongside leading peer-reviewed articles, and falls back to a curated current list if the profile API is unavailable. It also controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
 
 The active homepage background is `assets/sinha-lab-research-background.png`, a software-centered visual inspired by BABAPPAlign and BABAPPASnake: multiple sequence alignment blocks, learned residue-level scoring, workflow orchestration, and robustness-summary motifs. The site presents this artwork in a light gerua-led scientific palette aligned with the visual character of Visva-Bharati.
 
@@ -43,7 +43,7 @@ The browser tab favicon is `assets/favicon.svg`, an original abstract alignment/
 
 The principal investigator portrait is stored at `assets/krishnendu-sinha.jpeg`.
 
-The selected-publication cards use locally stored representative journal-cover thumbnails. Covers identify the journals and link directly to the corresponding articles; journal names without a prepared cover use a restrained text fallback.
+The research-highlight cards use locally stored representative journal-cover thumbnails for peer-reviewed articles. Preprints and journals without a prepared cover use a restrained typographic fallback.
 
 ## Local Preview
 
