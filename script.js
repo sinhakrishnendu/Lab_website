@@ -340,7 +340,7 @@ const selectLatestResearch = (publications) =>
         getPublicationDateValue(b) - getPublicationDateValue(a) ||
         a.title.localeCompare(b.title),
     )
-    .slice(0, 5);
+    .slice(0, 3);
 
 const formatPublicationDate = (work) => {
   const dateValue = getPublicationDateValue(work);
