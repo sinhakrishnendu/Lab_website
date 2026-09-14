@@ -31,13 +31,14 @@ Scholarly profiles:
     │   ├── bioinformatics-cover.jpg
     │   └── scientific-reports-cover.jpg
     ├── preprints/
-    │   └── biorxiv-logo.png
+    │   ├── biorxiv-logo.png
+    │   └── ecoevorxiv-logo.jpg
     ├── molecular-evolution-hero.png
     ├── krishnendu-sinha.jpeg
     └── sinha-lab-research-background.png
 ```
 
-`index.html` contains the research narrative, latest research, people, opportunities, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` fetches public ORCID works at page load, removes duplicate records, sorts them by full publication date, and displays the five newest works. A dated local fallback keeps the section available if the ORCID API cannot be reached. The script also controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
+`index.html` contains the research narrative, latest research, people, opportunities, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` uses public OpenAlex authorship metadata linked to ORCID `0000-0001-9590-3875`, retains records in which that exact authorship is marked as corresponding author, removes duplicate and repository-deposit records, and displays the five newest papers. A publisher-verified record covers BABAPPAlign while the corresponding-author designation propagates to OpenAlex. A dated local fallback keeps the section available if the public API cannot be reached. The script also controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
 
 The active homepage background is `assets/sinha-lab-research-background.png`, a software-centered visual inspired by BABAPPAlign and BABAPPASnake: multiple sequence alignment blocks, learned residue-level scoring, workflow orchestration, and robustness-summary motifs. The site presents this artwork in a light gerua-led scientific palette aligned with the visual character of Visva-Bharati.
 
@@ -45,7 +46,7 @@ The browser tab favicon is `assets/favicon.svg`, an original abstract alignment/
 
 The principal investigator portrait is stored at `assets/krishnendu-sinha.jpeg`.
 
-The latest-research cards use locally stored journal-cover thumbnails and the official bioRxiv wordmark. Sources without a prepared image use a restrained source-name treatment.
+The latest-research cards use locally stored journal-cover thumbnails and preprint-service wordmarks for bioRxiv and EcoEvoRxiv. Sources without a prepared image use a restrained source-name treatment.
 
 ## Local Preview
 
@@ -79,7 +80,7 @@ When updating the website:
 
 - Keep `index.html` in the repository root.
 - Keep publication links DOI-based where possible.
-- Keep the ORCID profile updated; the latest-research tiles refresh automatically from public ORCID works when the API is reachable.
+- Keep the ORCID identifier and OpenAlex authorship records accurate; the latest-research tiles refresh automatically when corresponding-author metadata is available.
 - Add a locally stored cover or source logo when a newly listed work introduces a journal or preprint service that is not yet represented in `script.js`.
 - Use original or properly licensed figures and media.
 - Use institutional marks and seals only when the appropriate permission or license is available.

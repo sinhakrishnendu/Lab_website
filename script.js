@@ -4,7 +4,15 @@ const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelectorAll(".nav-links a");
 const yearTarget = document.querySelector("[data-year]");
 const latestResearchTarget = document.querySelector("[data-latest-research]");
-const orcidWorksEndpoint = "https://pub.orcid.org/v3.0/0000-0001-9590-3875/works";
+const principalInvestigatorOrcid = "0000-0001-9590-3875";
+const openAlexWorksEndpoint =
+  `https://api.openalex.org/works?filter=authorships.author.orcid:${principalInvestigatorOrcid}` +
+  "&sort=publication_date:desc&per_page=100" +
+  "&select=title,doi,type,publication_date,publication_year,primary_location,authorships";
+
+const publisherVerifiedCorrespondingDois = new Set([
+  "10.1093/bioinformatics/btag189",
+]);
 
 const latestResearchFallback = [
   {
@@ -19,30 +27,6 @@ const latestResearchFallback = [
     publishedAt: Date.UTC(2026, 8, 3),
   },
   {
-    venue: "bioRxiv",
-    year: "2026",
-    title:
-      "Curli Carrier Burden: a quantitative trait-level microbiome index for amyloidogenic bacterial signals in Parkinson's disease gut metagenomes",
-    summary:
-      "Introduces a transparent, taxon-informed index for comparing amyloidogenic curli-carrier bacterial burden across Parkinson's disease gut metagenomic cohorts.",
-    doi: "10.64898/2026.05.25.727557",
-    href: "https://doi.org/10.64898/2026.05.25.727557",
-    type: "preprint",
-    publishedAt: Date.UTC(2026, 4, 28),
-  },
-  {
-    venue: "bioRxiv",
-    year: "2026",
-    title:
-      "NeuroFate: endpoint-locked transcriptomic axis scoring for neurodegeneration risk research",
-    summary:
-      "Provides endpoint-locked transcriptomic axis scoring with curated neurodegeneration gene sets, evidence grading, and explicit claim-safety rules.",
-    doi: "10.64898/2026.05.23.727380",
-    href: "https://doi.org/10.64898/2026.05.23.727380",
-    type: "preprint",
-    publishedAt: Date.UTC(2026, 4, 27),
-  },
-  {
     venue: "Bioinformatics",
     year: "2026",
     title: "BABAPPAlign: a multiple sequence alignment engine with a learned residue-level scoring function",
@@ -51,7 +35,7 @@ const latestResearchFallback = [
     doi: "10.1093/bioinformatics/btag189",
     href: "https://doi.org/10.1093/bioinformatics/btag189",
     type: "journal-article",
-    publishedAt: Date.UTC(2026, 4, 3),
+    publishedAt: Date.UTC(2026, 3, 16),
   },
   {
     venue: "Scientific Reports",
@@ -64,6 +48,29 @@ const latestResearchFallback = [
     href: "https://doi.org/10.1038/s41598-025-34129-6",
     type: "journal-article",
     publishedAt: Date.UTC(2026, 0, 3),
+  },
+  {
+    venue: "Biochemical Pharmacology",
+    year: "2025",
+    title: "Nutraceutical interventions for neuroprotection: a comprehensive review",
+    summary:
+      "Reviews nutraceutical interventions and their potential roles in neuroprotection across major neurodegenerative conditions.",
+    doi: "10.1016/j.bcp.2025.117637",
+    href: "https://doi.org/10.1016/j.bcp.2025.117637",
+    type: "journal-article",
+    publishedAt: Date.UTC(2025, 11, 15),
+  },
+  {
+    venue: "EcoEvoRxiv",
+    year: "2025",
+    title:
+      "Resurrection of Anopheles darlingi FREP1 Ancestor Reveals Adaptive Evolution Characterized by Changes in Protein Stability and Plasmodium falciparum Interaction",
+    summary:
+      "Uses ancestral reconstruction to examine adaptive changes in FREP1 protein stability and interaction with Plasmodium falciparum.",
+    doi: "10.32942/x2965c",
+    href: "https://doi.org/10.32942/x2965c",
+    type: "preprint",
+    publishedAt: Date.UTC(2025, 10, 21),
   },
 ];
 
@@ -91,7 +98,13 @@ const preprintServices = {
     height: 166,
   },
   medrxiv: { label: "medRxiv" },
-  ecoevorxiv: { label: "EcoEvoRxiv" },
+  ecoevorxiv: {
+    label: "EcoEvoRxiv",
+    src: "assets/preprints/ecoevorxiv-logo.jpg",
+    alt: "EcoEvoRxiv preprint server",
+    width: 400,
+    height: 160,
+  },
   arxiv: { label: "arXiv" },
   chemrxiv: { label: "ChemRxiv" },
 };
@@ -158,19 +171,10 @@ const isPreprint = (work) => {
   );
 };
 
-const getOrcidDateValue = (summary) => {
-  const date = summary["publication-date"] || {};
-  const year = Number(date.year?.value || 0);
-  const month = Number(date.month?.value || 1);
-  const day = Number(date.day?.value || 1);
-  return year ? Date.UTC(year, month - 1, day) : 0;
-};
-
-const getOrcidDoi = (summary) => {
-  const externalIds = summary["external-ids"]?.["external-id"] || [];
-  const doiRecord = externalIds.find((record) => record["external-id-type"] === "doi");
-  return normalizeDoi(doiRecord?.["external-id-value"]);
-};
+const normalizeOrcidIdentifier = (orcid) =>
+  String(orcid || "")
+    .trim()
+    .replace(/^https?:\/\/(www\.)?orcid\.org\//i, "");
 
 const getCuratedPublication = (doi, title) => {
   const normalizedDoi = normalizeDoi(doi);
@@ -236,56 +240,53 @@ const deduplicateProfileWorks = (works) => {
   return [...worksByTitle.values()];
 };
 
-const normalizeOrcidWork = (summary) => {
-  const title = summary.title?.title?.value || "";
-  const doi = getOrcidDoi(summary);
-  if (!title || !doi) return null;
+const isConfirmedCorrespondingAuthor = (record) => {
+  const doi = normalizeDoi(record.doi);
+  if (publisherVerifiedCorrespondingDois.has(doi)) return true;
 
-  const date = summary["publication-date"] || {};
-  const year = date.year?.value || "";
-  const type = summary.type || "";
+  return (record.authorships || []).some((authorship) => {
+    return (
+      authorship.is_corresponding === true &&
+      normalizeOrcidIdentifier(authorship.author?.orcid) === principalInvestigatorOrcid
+    );
+  });
+};
+
+const normalizeOpenAlexWork = (record) => {
+  const title = record.title || "";
+  const doi = normalizeDoi(record.doi);
+  const type = String(record.type || "").toLowerCase();
+  const sourceName = record.primary_location?.source?.display_name || "";
+  const isPaper = type === "article" || type === "preprint";
+  const isZenodoDeposit =
+    doi.startsWith("10.5281/zenodo") || sourceName.toLowerCase().includes("zenodo");
+
+  if (!title || !doi || !isPaper || isZenodoDeposit || !isConfirmedCorrespondingAuthor(record)) {
+    return null;
+  }
+
+  const publishedAt = record.publication_date
+    ? Date.parse(`${record.publication_date}T00:00:00Z`)
+    : 0;
   const inferredPreprintVenue = doi.startsWith("10.32942/")
     ? "EcoEvoRxiv"
     : doi.startsWith("10.48550/arxiv")
       ? "arXiv"
       : "bioRxiv";
-  const venue =
-    summary["journal-title"]?.value ||
-    (String(type).toLowerCase().includes("preprint") ||
-    doi.startsWith("10.1101/") ||
-    doi.startsWith("10.64898/") ||
-    doi.startsWith("10.32942/") ||
-    doi.startsWith("10.48550/arxiv")
-      ? inferredPreprintVenue
-      : "Scholarly output");
+  const venue = type === "preprint" ? inferredPreprintVenue : sourceName || "Scholarly output";
   const curatedWork = getCuratedPublication(doi, title);
   const work = {
     venue: curatedWork?.venue || venue,
-    year: curatedWork?.year || year,
+    year: curatedWork?.year || String(record.publication_year || ""),
     title: curatedWork?.title || title,
     doi: curatedWork?.doi || doi,
     href: curatedWork?.href || `https://doi.org/${doi}`,
     type: curatedWork?.type || type,
-    publishedAt: getOrcidDateValue(summary),
+    publishedAt: curatedWork?.publishedAt || publishedAt,
   };
 
   work.summary = inferPublicationSummary(work);
   return work;
-};
-
-const extractOrcidWorks = (data) => {
-  const works = [];
-  const groups = data.group || [];
-
-  groups.forEach((group) => {
-    const summaries = [...(group["work-summary"] || [])].sort(
-      (a, b) => getOrcidDateValue(b) - getOrcidDateValue(a),
-    );
-    const work = normalizeOrcidWork(summaries[0] || {});
-    if (work) works.push(work);
-  });
-
-  return works;
 };
 
 const renderPublicationCover = (work) => {
@@ -385,18 +386,20 @@ const renderLatestResearch = (publications = latestResearchFallback) => {
 
 renderLatestResearch();
 
-const loadLatestResearchFromOrcid = async () => {
+const loadLatestCorrespondingAuthorResearch = async () => {
   if (!latestResearchTarget || typeof fetch !== "function") return;
 
   try {
-    const response = await fetch(orcidWorksEndpoint, {
-      headers: { Accept: "application/json" },
-    });
+    const response = await fetch(openAlexWorksEndpoint);
 
-    if (!response.ok) throw new Error(`ORCID request failed with ${response.status}`);
+    if (!response.ok) throw new Error(`OpenAlex request failed with ${response.status}`);
 
     const data = await response.json();
-    const profileWorks = deduplicateProfileWorks(extractOrcidWorks(data));
+    const verifiedWorks = (data.results || []).map(normalizeOpenAlexWork).filter(Boolean);
+    const profileWorks = deduplicateProfileWorks([
+      ...latestResearchFallback,
+      ...verifiedWorks,
+    ]);
 
     if (profileWorks.length > 0) {
       renderLatestResearch(profileWorks);
@@ -406,7 +409,7 @@ const loadLatestResearchFromOrcid = async () => {
   }
 };
 
-loadLatestResearchFromOrcid();
+loadLatestCorrespondingAuthorResearch();
 
 if (yearTarget) {
   yearTarget.textContent = new Date().getFullYear();
