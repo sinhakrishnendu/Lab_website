@@ -486,16 +486,8 @@ a:focus-visible {
 }
 
 .publication-grid {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
-.publication-card {
-  grid-column: span 2;
-}
-
-.publication-card:nth-child(4),
-.publication-card:nth-child(5) {
-  grid-column: span 3;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .text-link,
@@ -539,7 +531,7 @@ a:focus-visible {
 }
 
 .publication-cover {
-  min-height: 295px;
+  min-height: 235px;
   display: grid;
   margin: 0;
   padding: 18px;
@@ -607,13 +599,13 @@ a:focus-visible {
 }
 
 .publication-body {
-  padding: 27px;
+  padding: 22px;
 }
 
 .publication-card h3 {
   margin-bottom: 8px;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.68rem;
+  font-size: 1.3rem;
   font-weight: 500;
 }
 
@@ -854,9 +846,7 @@ a:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .publication-card,
-  .publication-card:nth-child(4),
-  .publication-card:nth-child(5) {
+  .publication-card {
     grid-column: auto;
   }
 
