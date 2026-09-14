@@ -9,7 +9,7 @@
     >
     <title>Sinha Molecular Evolution Group | Visva-Bharati</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="stylesheet" href="styles.css?v=research-identity-20260914">
+    <link rel="stylesheet" href="styles.css?v=dynamic-research-20260914">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -42,7 +42,6 @@
 
         <div class="nav-links" id="primary-menu">
           <a href="#research">Research</a>
-          <a href="#publications">Publications</a>
           <a href="#people">People</a>
           <a href="#collaborators">Collaborators</a>
           <a href="#join">Join</a>
@@ -74,18 +73,10 @@
             <li>Reproducible software</li>
           </ul>
           <div class="hero-actions" aria-label="Key page links">
-            <a class="button primary" href="#research">Research Directions</a>
-            <a class="button secondary" href="#publications">Current Outputs</a>
+            <a class="button primary" href="#research">Latest Research</a>
+            <a class="button secondary" href="#people">Meet the Group</a>
           </div>
         </div>
-      </section>
-
-      <section class="latest-band" aria-label="Latest research">
-        <a class="container latest-research" href="https://doi.org/10.64898/2026.08.29.748011" target="_blank" rel="noreferrer">
-          <span class="latest-label">Latest research · September 2026</span>
-          <strong>Evolutionary replay of duplicate-gene retention is structured by lineage and event</strong>
-          <span class="latest-action">Read the preprint</span>
-        </a>
       </section>
 
       <section class="intro-band" aria-label="Research focus">
@@ -109,87 +100,14 @@
         </div>
       </section>
 
-      <section class="section" id="research">
+      <section class="section muted" id="research">
         <div class="container">
           <div class="section-heading">
             <p class="section-kicker">Research</p>
-            <h2>Current Research Directions</h2>
-            <p>
-              The group connects evolutionary questions with method development, explicit
-              uncertainty, and reproducible analysis across biological scales.
-            </p>
+            <h2>Latest Research</h2>
           </div>
 
-          <div class="card-grid four">
-            <article class="theme-card">
-              <span class="theme-number">01</span>
-              <h3>Evolutionary Replay after Genome Duplication</h3>
-              <p>
-                Testing whether ancestral gene-lineage identity predicts duplicate retention across
-                independent whole-genome duplications, and where event-specific history modifies replay.
-              </p>
-              <a class="card-link" href="https://doi.org/10.64898/2026.08.29.748011" target="_blank" rel="noreferrer">Latest preprint</a>
-            </article>
-            <article class="theme-card">
-              <span class="theme-number">02</span>
-              <h3>Selection as a Measurement Problem</h3>
-              <p>
-                Investigating when episodic branch-site signals are identifiable from finite
-                alignments using simulation, calibration, likelihood-free inference, and guarded reporting.
-              </p>
-              <a class="card-link" href="https://doi.org/10.32942/x2r073" target="_blank" rel="noreferrer">BABAPPA&Omega;</a>
-            </article>
-            <article class="theme-card">
-              <span class="theme-number">03</span>
-              <h3>Context-Aware Sequence Inference</h3>
-              <p>
-                Developing learned residue-level scoring for multiple sequence alignment and
-                reproducible workflows that expose sensitivity to alignment and trimming choices.
-              </p>
-              <div class="card-links">
-                <a class="card-link" href="https://doi.org/10.1093/bioinformatics/btag189" target="_blank" rel="noreferrer">BABAPPAlign</a>
-                <a class="card-link" href="https://doi.org/10.1101/2025.04.27.650835" target="_blank" rel="noreferrer">BABAPPASnake</a>
-              </div>
-            </article>
-            <article class="theme-card">
-              <span class="theme-number">04</span>
-              <h3>Evidence-Aware Biological Omics</h3>
-              <p>
-                Building transparent, endpoint-locked summaries for metagenomic and transcriptomic
-                questions, including microbial amyloid burden and neurodegeneration-related axes.
-              </p>
-              <div class="card-links">
-                <a class="card-link" href="https://doi.org/10.64898/2026.05.25.727557" target="_blank" rel="noreferrer">Curli Carrier Burden</a>
-                <a class="card-link" href="https://doi.org/10.64898/2026.05.23.727380" target="_blank" rel="noreferrer">NeuroFate</a>
-              </div>
-            </article>
-          </div>
-
-          <div class="research-pathway" aria-label="Research approach">
-            <p class="section-kicker">How We Work</p>
-            <ol>
-              <li><span>01</span><strong>Biological data</strong><small>Sequences, gene families, structures, and omics cohorts</small></li>
-              <li><span>02</span><strong>Representation</strong><small>Orthology, alignment, features, and ancestral states</small></li>
-              <li><span>03</span><strong>Inference</strong><small>Comparative models, simulation, and statistical testing</small></li>
-              <li><span>04</span><strong>Robustness</strong><small>Calibration, sensitivity analysis, and explicit limitations</small></li>
-              <li><span>05</span><strong>Interpretation</strong><small>Biological meaning with evidence boundaries preserved</small></li>
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      <section class="section muted" id="publications">
-        <div class="container">
-          <div class="section-heading">
-            <p class="section-kicker">Publications</p>
-            <h2>Research Highlights</h2>
-            <p>
-              A current research preprint and leading peer-reviewed contributions are selected
-              from the public ORCID record. Complete records remain available through scholarly profiles.
-            </p>
-          </div>
-
-          <div class="publication-grid" data-selected-publications></div>
+          <div class="publication-grid" data-latest-research aria-live="polite"></div>
 
           <div class="profile-links" aria-label="Scholarly profiles">
             <a href="https://scholar.google.com/citations?user=ZEI-IzMAAAAJ&amp;hl=en&amp;authuser=1" target="_blank" rel="noreferrer">
@@ -344,6 +262,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=research-identity-20260914"></script>
+    <script src="script.js?v=dynamic-research-20260914"></script>
   </body>
 </html>

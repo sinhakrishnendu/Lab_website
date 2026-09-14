@@ -3,12 +3,11 @@ const header = document.querySelector("[data-header]");
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelectorAll(".nav-links a");
 const yearTarget = document.querySelector("[data-year]");
-const selectedPublicationsTarget = document.querySelector("[data-selected-publications]");
+const latestResearchTarget = document.querySelector("[data-latest-research]");
 const orcidWorksEndpoint = "https://pub.orcid.org/v3.0/0000-0001-9590-3875/works";
 
-const profilePublicationHighlights = [
+const latestResearchFallback = [
   {
-    rank: 1,
     venue: "bioRxiv",
     year: "2026",
     title: "Evolutionary replay of duplicate-gene retention is structured by lineage and event",
@@ -20,58 +19,52 @@ const profilePublicationHighlights = [
     publishedAt: Date.UTC(2026, 8, 3),
   },
   {
-    rank: 2,
+    venue: "bioRxiv",
+    year: "2026",
+    title:
+      "Curli Carrier Burden: a quantitative trait-level microbiome index for amyloidogenic bacterial signals in Parkinson's disease gut metagenomes",
+    summary:
+      "Introduces a transparent, taxon-informed index for comparing amyloidogenic curli-carrier bacterial burden across Parkinson's disease gut metagenomic cohorts.",
+    doi: "10.64898/2026.05.25.727557",
+    href: "https://doi.org/10.64898/2026.05.25.727557",
+    type: "preprint",
+    publishedAt: Date.UTC(2026, 4, 28),
+  },
+  {
+    venue: "bioRxiv",
+    year: "2026",
+    title:
+      "NeuroFate: endpoint-locked transcriptomic axis scoring for neurodegeneration risk research",
+    summary:
+      "Provides endpoint-locked transcriptomic axis scoring with curated neurodegeneration gene sets, evidence grading, and explicit claim-safety rules.",
+    doi: "10.64898/2026.05.23.727380",
+    href: "https://doi.org/10.64898/2026.05.23.727380",
+    type: "preprint",
+    publishedAt: Date.UTC(2026, 4, 27),
+  },
+  {
     venue: "Bioinformatics",
     year: "2026",
     title: "BABAPPAlign: a multiple sequence alignment engine with a learned residue-level scoring function",
     summary:
-      "Introduces a progressive MSA engine with a trained residue-level scorer, fixed protein-language-model embeddings, exact affine-gap dynamic programming, and codon-aware alignment.",
+      "Introduces a progressive multiple sequence alignment engine with learned residue-level scoring, protein-language-model embeddings, affine-gap dynamic programming, and codon-aware alignment.",
     doi: "10.1093/bioinformatics/btag189",
     href: "https://doi.org/10.1093/bioinformatics/btag189",
     type: "journal-article",
     publishedAt: Date.UTC(2026, 4, 3),
   },
   {
-    rank: 3,
     venue: "Scientific Reports",
     year: "2026",
     title:
       "Episodic positive selection structurally stabilizes the Arabidopsis CONSTANS-like gene COL5 indicating adaptive evolution",
     summary:
-      "Combines phylogenomic analysis, codon-based selection tests, ancestral reconstruction, Rosetta calculations, and molecular dynamics to examine the structural consequences of derived COL5 residues.",
+      "Combines phylogenomics, codon-based selection tests, ancestral reconstruction, structure calculations, and molecular dynamics to examine derived COL5 residues.",
     doi: "10.1038/s41598-025-34129-6",
     href: "https://doi.org/10.1038/s41598-025-34129-6",
     type: "journal-article",
     publishedAt: Date.UTC(2026, 0, 3),
   },
-  {
-    rank: 4,
-    venue: "Scientific Reports",
-    year: "2026",
-    title:
-      "Lineage-specific selection signals in the Growth arrest-specific protein 8 (GAS8) domain protein of Trypanosoma melophagium",
-    summary:
-      "Uses maximum-likelihood phylogenetics, codon-based tests, ancestral reconstruction, and Rosetta estimates to report modest, method-dependent support for lineage-specific change in a conserved cytoskeletal protein.",
-    doi: "10.1038/s41598-026-56233-x",
-    href: "https://doi.org/10.1038/s41598-026-56233-x",
-    type: "journal-article",
-    publishedAt: Date.UTC(2026, 5, 9),
-  },
-];
-
-const venueImpactScores = [
-  ["bioinformatics", 120],
-  ["scientific reports", 105],
-  ["chemical research in toxicology", 96],
-  ["archives of toxicology", 94],
-  ["food and chemical toxicology", 92],
-  ["biofactors", 88],
-  ["biochimica et biophysica acta", 86],
-  ["toxicology in vitro", 84],
-  ["toxicology", 82],
-  ["current drug metabolism", 78],
-  ["translational medicine of aging", 76],
-  ["biorxiv", 36],
 ];
 
 const journalCovers = {
@@ -89,10 +82,39 @@ const journalCovers = {
   },
 };
 
+const preprintServices = {
+  biorxiv: {
+    label: "bioRxiv",
+    src: "assets/preprints/biorxiv-logo.png",
+    alt: "bioRxiv preprint server",
+    width: 478,
+    height: 166,
+  },
+  medrxiv: { label: "medRxiv" },
+  ecoevorxiv: { label: "EcoEvoRxiv" },
+  arxiv: { label: "arXiv" },
+  chemrxiv: { label: "ChemRxiv" },
+};
+
 const getJournalCover = (venue) => {
   const normalizedVenue = String(venue || "").toLowerCase();
   const key = Object.keys(journalCovers).find((name) => normalizedVenue.includes(name));
   return key ? journalCovers[key] : null;
+};
+
+const getPreprintService = (work) => {
+  const venue = String(work.venue || "").toLowerCase();
+  const doi = normalizeDoi(work.doi);
+
+  if (venue.includes("medrxiv")) return preprintServices.medrxiv;
+  if (venue.includes("ecoevorxiv") || doi.startsWith("10.32942/")) return preprintServices.ecoevorxiv;
+  if (venue.includes("chemrxiv")) return preprintServices.chemrxiv;
+  if (venue.includes("arxiv") || doi.startsWith("10.48550/arxiv")) return preprintServices.arxiv;
+  if (venue.includes("biorxiv") || doi.startsWith("10.1101/") || doi.startsWith("10.64898/")) {
+    return preprintServices.biorxiv;
+  }
+
+  return null;
 };
 
 const escapeHtml = (value) =>
@@ -118,20 +140,6 @@ const getPublicationYear = (work) => {
   return Number.isFinite(year) ? year : 0;
 };
 
-const getVenueImpactScore = (venue) => {
-  const normalizedVenue = String(venue || "").toLowerCase();
-  return venueImpactScores.find(([name]) => normalizedVenue.includes(name))?.[1] || 0;
-};
-
-const getDoiPreferenceScore = (doi) => {
-  const normalizedDoi = normalizeDoi(doi);
-  if (normalizedDoi.startsWith("10.1093/")) return 10;
-  if (normalizedDoi.startsWith("10.1038/")) return 9;
-  if (normalizedDoi.startsWith("10.1021/")) return 7;
-  if (normalizedDoi.startsWith("10.1101/") || normalizedDoi.startsWith("10.64898/")) return 4;
-  return 0;
-};
-
 const isPreprint = (work) => {
   const publicationType = String(work.type || "").toLowerCase();
   const venue = String(work.venue || "").toLowerCase();
@@ -139,10 +147,14 @@ const isPreprint = (work) => {
   return (
     publicationType.includes("preprint") ||
     venue.includes("biorxiv") ||
+    venue.includes("medrxiv") ||
     venue.includes("ecoevorxiv") ||
+    venue.includes("arxiv") ||
+    venue.includes("chemrxiv") ||
     doi.startsWith("10.1101/") ||
     doi.startsWith("10.64898/") ||
-    doi.startsWith("10.32942/")
+    doi.startsWith("10.32942/") ||
+    doi.startsWith("10.48550/arxiv")
   );
 };
 
@@ -163,7 +175,7 @@ const getOrcidDoi = (summary) => {
 const getCuratedPublication = (doi, title) => {
   const normalizedDoi = normalizeDoi(doi);
   const normalizedTitle = String(title || "").toLowerCase();
-  return profilePublicationHighlights.find((work) => {
+  return latestResearchFallback.find((work) => {
     return (
       normalizeDoi(work.doi) === normalizedDoi ||
       normalizedTitle.includes(work.title.toLowerCase().slice(0, 32))
@@ -177,46 +189,21 @@ const inferPublicationSummary = (work) => {
 
   const normalizedTitle = work.title.toLowerCase();
   if (normalizedTitle.includes("workflow") || normalizedTitle.includes("pipeline")) {
-    return "Profile-listed workflow contribution for reproducible molecular evolution analysis and robustness-aware reporting.";
+    return "Develops a reproducible molecular evolution workflow with robustness-aware analysis and reporting.";
   }
   if (normalizedTitle.includes("alignment")) {
-    return "Profile-listed sequence-analysis work connected to alignment, scoring, and computational molecular biology.";
+    return "Develops sequence-analysis methods for alignment, scoring, and computational molecular biology.";
   }
   if (normalizedTitle.includes("selection") || normalizedTitle.includes("codon") || normalizedTitle.includes("adaptive")) {
-    return "Profile-listed molecular evolution study connecting sequence-level signals with biological interpretation.";
+    return "Connects sequence-level evidence for molecular evolution with biological interpretation.";
   }
   if (normalizedTitle.includes("duplicate") || normalizedTitle.includes("genome evolution")) {
-    return "Profile-listed evolutionary genomics study examining the retention and loss of duplicated genes across lineages.";
+    return "Examines the retention and loss of duplicated genes across evolutionary lineages.";
   }
   if (normalizedTitle.includes("transcriptom") || normalizedTitle.includes("metagenom") || normalizedTitle.includes("microbiome")) {
-    return "Profile-listed computational omics study using explicit, reproducible biological summaries and guarded interpretation.";
+    return "Uses explicit, reproducible biological summaries to investigate transcriptomic or metagenomic data.";
   }
-  return "Profile-listed publication. See the DOI record and scholarly profiles for full bibliographic details.";
-};
-
-const scorePublicationImpact = (work) => {
-  const title = work.title.toLowerCase();
-  const doi = work.doi.toLowerCase();
-  const venueScore = getVenueImpactScore(work.venue);
-  const recencyScore = Math.max(0, Math.min(20, (getPublicationYear(work) - 2020) * 3));
-  let topicScore = 0;
-
-  if (title.includes("babappalign")) topicScore += 70;
-  if (title.includes("babappasnake") || title.includes("babappa")) topicScore += 66;
-  if (title.includes("positive selection") || title.includes("adaptive evolution")) topicScore += 32;
-  if (title.includes("codon") || title.includes("alignment") || title.includes("phylogen")) topicScore += 24;
-  if (title.includes("duplicate-gene") || title.includes("whole-genome duplication")) topicScore += 36;
-  if (title.includes("identifiability") || title.includes("evolutionary replay")) topicScore += 28;
-  if (title.includes("transcriptomic") || title.includes("metagenom")) topicScore += 18;
-  if (title.includes("molecular") || title.includes("evolution")) topicScore += 10;
-
-  let doiScore = 0;
-  doiScore += getDoiPreferenceScore(doi);
-  if (doi.startsWith("10.1101/") && title.includes("babappa")) doiScore += 8;
-
-  const preprintPenalty = isPreprint(work) ? 24 : 0;
-
-  return venueScore + recencyScore + topicScore + doiScore - preprintPenalty;
+  return "Advances research in molecular evolution and computational biology.";
 };
 
 const canonicalPublicationTitle = (title) =>
@@ -229,13 +216,10 @@ const canonicalPublicationTitle = (title) =>
     .replace(/\s+/g, " ");
 
 const compareDuplicateWorks = (candidate, current) => {
-  const venueDifference = getVenueImpactScore(candidate.venue) - getVenueImpactScore(current.venue);
-  if (venueDifference !== 0) return venueDifference;
-
-  const doiDifference = getDoiPreferenceScore(candidate.doi) - getDoiPreferenceScore(current.doi);
-  if (doiDifference !== 0) return doiDifference;
-
-  return (candidate.score ?? 0) - (current.score ?? 0);
+  const candidateIsArticle = !isPreprint(candidate);
+  const currentIsArticle = !isPreprint(current);
+  if (candidateIsArticle !== currentIsArticle) return candidateIsArticle ? 1 : -1;
+  return (candidate.publishedAt ?? 0) - (current.publishedAt ?? 0);
 };
 
 const deduplicateProfileWorks = (works) => {
@@ -260,10 +244,19 @@ const normalizeOrcidWork = (summary) => {
   const date = summary["publication-date"] || {};
   const year = date.year?.value || "";
   const type = summary.type || "";
+  const inferredPreprintVenue = doi.startsWith("10.32942/")
+    ? "EcoEvoRxiv"
+    : doi.startsWith("10.48550/arxiv")
+      ? "arXiv"
+      : "bioRxiv";
   const venue =
     summary["journal-title"]?.value ||
-    (String(type).toLowerCase().includes("preprint") || doi.startsWith("10.1101/") || doi.startsWith("10.64898/")
-      ? "bioRxiv"
+    (String(type).toLowerCase().includes("preprint") ||
+    doi.startsWith("10.1101/") ||
+    doi.startsWith("10.64898/") ||
+    doi.startsWith("10.32942/") ||
+    doi.startsWith("10.48550/arxiv")
+      ? inferredPreprintVenue
       : "Scholarly output");
   const curatedWork = getCuratedPublication(doi, title);
   const work = {
@@ -277,7 +270,6 @@ const normalizeOrcidWork = (summary) => {
   };
 
   work.summary = inferPublicationSummary(work);
-  work.score = scorePublicationImpact(work);
   return work;
 };
 
@@ -297,13 +289,29 @@ const extractOrcidWorks = (data) => {
 };
 
 const renderPublicationCover = (work) => {
+  const preprintService = getPreprintService(work);
   const cover = getJournalCover(work.venue);
+
+  if (isPreprint(work) && preprintService?.src) {
+    return `
+      <a class="publication-cover publication-cover-preprint" href="${escapeHtml(work.href)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(work.title)}">
+        <img
+          src="${escapeHtml(preprintService.src)}"
+          alt="${escapeHtml(preprintService.alt)}"
+          width="${preprintService.width}"
+          height="${preprintService.height}"
+          loading="lazy"
+        >
+        <small>Preprint</small>
+      </a>
+    `;
+  }
 
   if (!cover) {
     return `
       <figure class="publication-cover publication-cover-fallback">
-        <span>${escapeHtml(work.venue)}</span>
-        <small>${isPreprint(work) ? "Research preprint" : "Scholarly output"}</small>
+        <span>${escapeHtml(preprintService?.label || work.venue)}</span>
+        <small>${isPreprint(work) ? "Preprint" : "Publication"}</small>
       </figure>
     `;
   }
@@ -321,43 +329,42 @@ const renderPublicationCover = (work) => {
   `;
 };
 
-const selectPublicationHighlights = (publications) => {
-  const rankedFallback = publications.filter((work) => Number.isFinite(work.rank));
-  if (rankedFallback.length > 0) {
-    return [...rankedFallback].sort((a, b) => a.rank - b.rank).slice(0, 3);
-  }
+const getPublicationDateValue = (work) =>
+  work.publishedAt || Date.UTC(getPublicationYear(work), 0, 1);
 
-  const byImpact = [...publications].sort(
-    (a, b) =>
-      (b.score ?? 0) - (a.score ?? 0) ||
-      (b.publishedAt ?? 0) - (a.publishedAt ?? 0) ||
-      getPublicationYear(b) - getPublicationYear(a),
-  );
-  const newestPreprint = byImpact
-    .filter(isPreprint)
-    .sort((a, b) => (b.publishedAt ?? 0) - (a.publishedAt ?? 0))[0];
-  const leadingArticles = byImpact.filter((work) => !isPreprint(work)).slice(0, 2);
-  const selected = [newestPreprint, ...leadingArticles].filter(Boolean);
+const selectLatestResearch = (publications) =>
+  [...publications]
+    .sort(
+      (a, b) =>
+        getPublicationDateValue(b) - getPublicationDateValue(a) ||
+        a.title.localeCompare(b.title),
+    )
+    .slice(0, 5);
 
-  for (const work of byImpact) {
-    if (selected.length >= 3) break;
-    if (!selected.includes(work)) selected.push(work);
-  }
-
-  return selected.slice(0, 3);
+const formatPublicationDate = (work) => {
+  const dateValue = getPublicationDateValue(work);
+  if (!dateValue) return work.year;
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(dateValue));
 };
 
 const getPublicationMeta = (work) => {
-  const status = isPreprint(work) ? "Preprint" : "Peer-reviewed article";
-  return `${status} · ${work.venue} · ${work.year}`;
+  if (isPreprint(work)) {
+    const service = getPreprintService(work);
+    return `Preprint · ${service?.label || work.venue} · ${formatPublicationDate(work)}`;
+  }
+  return `${work.venue} · ${formatPublicationDate(work)}`;
 };
 
-const renderSelectedPublications = (publications = profilePublicationHighlights) => {
-  if (!selectedPublicationsTarget) return;
+const renderLatestResearch = (publications = latestResearchFallback) => {
+  if (!latestResearchTarget) return;
 
-  const selectedWorks = selectPublicationHighlights(publications);
+  const selectedWorks = selectLatestResearch(publications);
 
-  selectedPublicationsTarget.innerHTML = selectedWorks
+  latestResearchTarget.innerHTML = selectedWorks
     .map(
       (work) => `
         <article class="publication-card">
@@ -376,10 +383,10 @@ const renderSelectedPublications = (publications = profilePublicationHighlights)
     .join("");
 };
 
-renderSelectedPublications();
+renderLatestResearch();
 
-const loadOrcidPublicationHighlights = async () => {
-  if (!selectedPublicationsTarget || typeof fetch !== "function") return;
+const loadLatestResearchFromOrcid = async () => {
+  if (!latestResearchTarget || typeof fetch !== "function") return;
 
   try {
     const response = await fetch(orcidWorksEndpoint, {
@@ -389,19 +396,17 @@ const loadOrcidPublicationHighlights = async () => {
     if (!response.ok) throw new Error(`ORCID request failed with ${response.status}`);
 
     const data = await response.json();
-    const profileWorks = deduplicateProfileWorks(extractOrcidWorks(data)).sort(
-      (a, b) => (b.score ?? 0) - (a.score ?? 0) || getPublicationYear(b) - getPublicationYear(a),
-    );
+    const profileWorks = deduplicateProfileWorks(extractOrcidWorks(data));
 
-    if (profileWorks.length >= 3) {
-      renderSelectedPublications(profileWorks);
+    if (profileWorks.length > 0) {
+      renderLatestResearch(profileWorks);
     }
   } catch (error) {
-    console.info("Using curated selected-publication fallback.", error);
+    console.info("Using the latest-research fallback.", error);
   }
 };
 
-loadOrcidPublicationHighlights();
+loadLatestResearchFromOrcid();
 
 if (yearTarget) {
   yearTarget.textContent = new Date().getFullYear();
