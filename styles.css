@@ -641,6 +641,26 @@ a:focus-visible {
   box-shadow: none;
 }
 
+.group-member-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 54px;
+  align-items: start;
+  padding-top: 34px;
+  border-top: 1px solid var(--line);
+}
+
+.group-member-heading h2 {
+  font-size: 2.35rem;
+}
+
+.member-card {
+  min-height: 320px;
+  align-items: flex-start;
+  border-top: 4px solid var(--gerua);
+}
+
 .person-photo {
   flex: 0 0 184px;
   width: 184px;
@@ -656,6 +676,22 @@ a:focus-visible {
   border: 0;
   border-radius: 0;
   background: transparent;
+}
+
+.member-photo {
+  flex: 0 0 184px;
+  width: 184px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  margin: 0;
+  background: var(--paper-gerua);
+}
+
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .person-links {
@@ -869,6 +905,12 @@ a:focus-visible {
     grid-template-columns: 1fr;
     gap: 34px;
   }
+
+  .group-member-row {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -974,7 +1016,8 @@ a:focus-visible {
   }
 
   .person-photo,
-  .person-photo img {
+  .person-photo img,
+  .member-photo {
     width: 100%;
     max-width: 240px;
   }
