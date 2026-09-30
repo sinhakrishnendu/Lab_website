@@ -35,6 +35,7 @@ Scholarly profiles:
     │   └── ecoevorxiv-logo.jpg
     ├── molecular-evolution-hero.png
     ├── krishnendu-sinha.jpeg
+    ├── nabanita-ghosh.jpeg
     ├── satwato-goswami-profile.jpeg
     ├── visva-bharati-logo.png
     └── sinha-lab-research-background.png
