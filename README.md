@@ -36,6 +36,7 @@ Scholarly profiles:
     ├── molecular-evolution-hero.png
     ├── krishnendu-sinha.jpeg
     ├── nabanita-ghosh.jpeg
+    ├── sutapa-sanyal.jpeg
     ├── satwato-goswami-profile.jpeg
     ├── visva-bharati-logo.png
     └── sinha-lab-research-background.png
