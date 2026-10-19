@@ -1225,6 +1225,25 @@ div[id] {
   font-weight: 400;
 }
 
+.member .member-work {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.member-work a {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+}
+
+.member-work a:hover {
+  text-decoration-color: var(--ink);
+}
+
 .collab-note {
   margin-top: 24px !important;
   color: var(--muted);
