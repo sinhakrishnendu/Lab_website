@@ -47,6 +47,7 @@ Scholarly profiles:
     ├── sutapa-sanyal.jpeg
     ├── satwato-goswami-profile.jpeg
     ├── visva-bharati-logo.png
+    ├── og-image.png
     └── sinha-lab-research-background.png
 ```
 
@@ -54,31 +55,31 @@ Scholarly profiles:
 
 ## Publications (automatic)
 
-The homepage shows the three newest **peer-reviewed journal articles** and the three newest **preprints** for which Dr. Sinha is corresponding author. `publications.html` lists every work, grouped by year, with filters, search, author lists, open-access PDF links and a BibTeX "Cite" button.
+The homepage Publications section shows the three newest **peer-reviewed journal articles** and the three newest **preprints** for which Dr. Sinha is corresponding author. `publications.html` lists every work, grouped by year, with filters, search, author lists, open-access PDF links and a BibTeX "Cite" button.
 
 How it works:
 
 1. `publications-core.js` reads the public ORCID record (`0000-0001-9590-3875`) every time a page loads.
 2. Each DOI is looked up in OpenAlex for authors, the corresponding-author flag, an open-access PDF and the abstract.
 3. A work counts as corresponding-author when OpenAlex marks the ORCID as corresponding, when it is single-authored, or when its DOI is listed in `correspondingDois` in `publications-config.js`. `notCorrespondingDois` overrides OpenAlex the other way.
-4. A preprint later published as a journal article (near-identical title) is hidden from the preprint list and linked to the published version on the full list.
+4. A preprint later published as a journal article is hidden everywhere. Near-identical titles are detected automatically; when the published title differs, list the pair in `supersededDois` in `publications-config.js`.
 5. `data/publications-snapshot.js` is shown instantly and used if ORCID cannot be reached. A GitHub Action (`.github/workflows/update-publications.yml`) rebuilds it every night from ORCID and commits it when something changed. It can also be run by hand from the repository's Actions tab, or locally with `node scripts/update-publications.mjs`.
 
-To keep the lists current, add new papers and preprints to ORCID. A very new preprint may take a few days to appear in OpenAlex; until then its corresponding-author status is unknown, so add its DOI to `correspondingDois` if it should appear immediately. Short curated summaries and extra links (for example code) are set per DOI in `publications-config.js`.
+To keep the lists current, add new papers and preprints to ORCID. A very new preprint may take a few days to appear in OpenAlex; until then its corresponding-author status is unknown, so add its DOI to `correspondingDois` if it should appear immediately. Short curated summaries and extra links (for example code) are set per DOI in `publications-config.js`, and species names listed in `italicTerms` are set in italics automatically.
 
 The homepage opens with a decorative circular phylogeny drawn by `figure.js`: a strictly bifurcating tree generated with a fixed random seed, with an outer ring of sequence-alignment columns. It is deliberately generic, so it is not tied to any dataset or paper and never needs updating. It draws once on load and is static for visitors who prefer reduced motion.
 
 Colour on the site follows the dN/dS (ω) classes used in selection analyses: teal for purifying selection (ω < 1, structure and links), ochre for relaxed constraint (ω ≈ 1), and Visva-Bharati vermilion for positive selection (ω > 1, highlights and calls to action). Type is Source Serif 4 for headings and figure captions, Public Sans for body text, and JetBrains Mono only for sequence data, all loaded from Google Fonts.
 
-Page sections: research questions, research themes (four broad, publication-independent areas plus study systems), latest peer-reviewed papers, software (BABAPPAlign, BABAPPASnake), latest preprints, people and collaborators, joining the group, and contact. The page also carries Open Graph metadata and schema.org `ResearchOrganization` structured data for search engines.
+Page sections: research questions, research themes (four broad, publication-independent areas), publications (recent peer-reviewed papers and recent preprints), software (BABAPPAlign, BABAPPASnake), people and collaborators, joining the group, and contact. The pages carry Open Graph metadata with a link-preview image (`assets/og-image.png`) and schema.org `ResearchOrganization` structured data for search engines.
 
-`assets/sinha-lab-research-background.png` is no longer shown on the page but is kept as the social-sharing preview image.
+`assets/og-image.png` is the link-preview image used when the site is shared (1200 × 630, rendered from the homepage tree). `assets/sinha-lab-research-background.png` is no longer used.
 
 The browser tab favicon is `assets/favicon.svg`, an original abstract alignment/workflow mark.
 
 The principal investigator portrait is stored at `assets/krishnendu-sinha.jpeg`.
 
-The latest-research cards use locally stored journal-cover thumbnails and preprint-service wordmarks for bioRxiv and EcoEvoRxiv. Sources without a prepared image use a restrained source-name treatment.
+Paper cards use locally stored journal-cover thumbnails; journals without a prepared cover use a restrained name treatment. Preprint cards are text-only.
 
 ## Local Preview
 
@@ -113,7 +114,7 @@ When updating the website:
 - Keep `index.html` in the repository root.
 - Keep publication links DOI-based where possible.
 - Keep the ORCID identifier and OpenAlex authorship records accurate; the latest-research tiles refresh automatically when corresponding-author metadata is available.
-- Add a locally stored cover or source logo when a newly listed work introduces a journal or preprint service that is not yet represented in `script.js`.
+- Add a locally stored cover or source logo when a newly listed work introduces a journal or preprint service that is not yet represented in `publications-config.js`.
 - Use original or properly licensed figures and media.
 - Use institutional marks and seals only when the appropriate permission or license is available.
 - Add new group members, publications, software, and datasets as the group grows.

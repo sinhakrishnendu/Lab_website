@@ -15,6 +15,25 @@
   const esc = (value) =>
     String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
+  const plain = (text) => String(text || "").replace(/<[^>]+>/g, "");
+
+  // Escape everything, then restore the few tags allowed in titles and italicise
+  // configured species names (outside any existing <i>…</i>).
+  const italicPattern = (() => {
+    const terms = [...(config.italicTerms || [])]
+      .sort((a, b) => b.length - a.length)
+      .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    return terms.length ? new RegExp(`\\b(${terms.join("|")})\\b`, "g") : null;
+  })();
+  const rich = (text) => {
+    const html = esc(text).replace(/&lt;(\/?)(i|sup|sub)&gt;/g, "<$1$2>");
+    if (!italicPattern) return html;
+    return html
+      .split(/(<i>.*?<\/i>)/g)
+      .map((part) => (part.startsWith("<i>") ? part : part.replace(italicPattern, "<i>$1</i>")))
+      .join("");
+  };
+
   const formatDate = (record) => {
     if (!record.date) return "";
     const [y, m, d] = record.date.split("-").map(Number);
@@ -65,17 +84,18 @@
 
   const card = (record) => {
     const c = cover(record);
+    const showVisual = record.kind !== "preprint";
     const visual = c
       ? `<img${c.logo ? ' class="pub-logo"' : ""} src="${esc(c.src)}" alt="" width="${c.width}" height="${c.height}" loading="lazy">`
       : `<span class="pub-venue-mark">${esc(record.venue || kindLabel[record.kind])}</span>`;
     return `
-      <article class="pub-card${c && !c.logo ? " has-cover" : ""}">
-        <a class="pub-visual" href="${esc(record.href)}" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true">${visual}</a>
+      <article class="pub-card${c && !c.logo ? " has-cover" : ""}${showVisual ? "" : " text-only"}">
+        ${showVisual ? `<a class="pub-visual" href="${esc(record.href)}" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true">${visual}</a>` : ""}
         <div class="pub-body">
           <p class="pub-meta"><em>${esc(record.venue)}</em>, ${esc(formatDate(record))}</p>
-          <h3><a href="${esc(record.href)}" target="_blank" rel="noreferrer">${esc(record.title)}</a></h3>
+          <h3><a href="${esc(record.href)}" target="_blank" rel="noreferrer">${rich(record.title)}</a></h3>
           ${record.authors?.length ? `<p class="pub-authors">${authorList(record)}</p>` : ""}
-          ${record.summary ? `<p class="pub-summary">${esc(record.summary)}</p>` : ""}
+          ${record.summary ? `<p class="pub-summary">${rich(record.summary)}</p>` : ""}
           <p class="pub-links">${linkRow(record)}</p>
         </div>
       </article>`;
@@ -83,12 +103,11 @@
 
   const entry = (record) => `
     <li class="pub-entry" data-kind="${esc(record.kind)}" data-corr="${record.corresponding ? "1" : "0"}">
-      <p class="pub-entry-title"><a href="${esc(record.href)}" target="_blank" rel="noreferrer">${esc(record.title)}</a></p>
+      <p class="pub-entry-title"><a href="${esc(record.href)}" target="_blank" rel="noreferrer">${rich(record.title)}</a></p>
       ${record.authors?.length ? `<p class="pub-authors">${authorList(record, 14)}</p>` : ""}
       <p class="pub-meta">
         ${record.kind !== "article" ? `<span class="pub-kind">${esc(kindLabel[record.kind])}</span>` : ""}
         <em>${esc(record.venue)}</em>${record.date ? `, ${esc(formatDate(record))}` : ""}
-        ${record.supersededBy ? `<span class="pub-note">Published version: <a href="https://doi.org/${esc(record.supersededBy)}" target="_blank" rel="noreferrer">${esc(record.supersededBy)}</a></span>` : ""}
       </p>
       <p class="pub-links">${linkRow(record)}</p>
     </li>`;
@@ -114,13 +133,14 @@
     const corrOnly = document.querySelector("[data-pub-corr]")?.checked;
     const query = (document.querySelector("[data-pub-search]")?.value || "").trim().toLowerCase();
 
-    const visible = allRecords.filter((r) => {
+    const listed = allRecords.filter((r) => !r.supersededBy);
+    const visible = listed.filter((r) => {
       if (kind === "preprint" && r.kind !== "preprint") return false;
       if (kind === "article" && r.kind !== "article") return false;
       if (kind === "chapter" && r.kind !== "chapter") return false;
       if (corrOnly && !r.corresponding) return false;
       if (query) {
-        const hay = `${r.title} ${r.venue} ${r.year} ${(r.authors || []).map((a) => a.name).join(" ")}`.toLowerCase();
+        const hay = `${plain(r.title)} ${r.venue} ${r.year} ${(r.authors || []).map((a) => a.name).join(" ")}`.toLowerCase();
         if (!hay.includes(query)) return false;
       }
       return true;
@@ -146,7 +166,7 @@
       : `<p class="pub-empty">No publications match these filters.</p>`;
 
     const counter = document.querySelector("[data-pub-count]");
-    if (counter) counter.textContent = `${visible.length} of ${allRecords.length} works`;
+    if (counter) counter.textContent = `${visible.length} of ${listed.length} works`;
   };
 
   const renderStats = () => {
@@ -154,11 +174,15 @@
     if (!target || !allRecords.length) return;
     const n = (kind) => allRecords.filter((r) => r.kind === kind && !r.supersededBy).length;
     const corr = allRecords.filter((r) => r.corresponding && !r.supersededBy).length;
-    target.innerHTML = `
-      <div><dt>Journal articles</dt><dd>${n("article")}</dd></div>
-      <div><dt>Preprints</dt><dd>${n("preprint")}</dd></div>
-      <div><dt>Book chapters</dt><dd>${n("chapter")}</dd></div>
-      <div><dt>As corresponding author</dt><dd>${corr}</dd></div>`;
+    target.innerHTML = [
+      ["Journal articles", n("article")],
+      ["Preprints", n("preprint")],
+      ["Book chapters", n("chapter")],
+      ["As corresponding author", corr],
+    ]
+      .filter(([, value]) => value > 0)
+      .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
+      .join("");
   };
 
   const setStatus = (text) => {
@@ -180,7 +204,7 @@
   const bibtex = (record) => {
     const latex = (text) => String(text || "").replace(/([&%$#_{}])/g, "\\$1");
     const lastName = (name) => String(name || "").trim().split(/\s+/).pop() || "";
-    const firstWord = (record.title.match(/[A-Za-z]{4,}/) || ["work"])[0].toLowerCase();
+    const firstWord = (plain(record.title).match(/[A-Za-z]{4,}/) || ["work"])[0].toLowerCase();
     const key = `${lastName(record.authors?.[0]?.name || "sinha").toLowerCase().replace(/[^a-z]/g, "")}${record.year}${firstWord}`;
     const authors = (record.authors || []).map((a) => {
       const parts = a.name.trim().split(/\s+/);
@@ -189,7 +213,7 @@
     });
     const type = record.kind === "article" ? "article" : record.kind === "chapter" ? "incollection" : "misc";
     const fields = [
-      ["title", `{${latex(record.title)}}`],
+      ["title", `{${latex(plain(record.title))}}`],
       authors.length ? ["author", authors.join(" and ")] : null,
       record.kind === "article" ? ["journal", latex(record.venue)] : null,
       record.kind === "chapter" ? ["booktitle", latex(record.venue)] : null,

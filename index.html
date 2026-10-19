@@ -12,7 +12,11 @@
     <meta property="og:title" content="Evolutionary Bioinformatics Group | Visva-Bharati">
     <meta property="og:description" content="Evolutionary genomics, molecular adaptation, sequence-alignment methods and reproducible software at the Department of Zoology, Visva-Bharati.">
     <meta property="og:url" content="https://sinhakrishnendu.github.io/Lab_website/">
-    <meta property="og:image" content="https://sinhakrishnendu.github.io/Lab_website/assets/sinha-lab-research-background.png">
+    <meta property="og:image" content="https://sinhakrishnendu.github.io/Lab_website/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Evolutionary Bioinformatics Group, Visva-Bharati: a circular phylogeny with an alignment ring">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Evolutionary Bioinformatics Group | Visva-Bharati</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +25,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     >
-    <link rel="stylesheet" href="styles.css?v=20261019g">
+    <link rel="stylesheet" href="styles.css?v=20261019h">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -97,9 +101,8 @@
 
         <div class="nav-links" id="primary-menu">
           <a href="#programmes">Research</a>
-          <a href="#publications">Papers</a>
+          <a href="#publications">Publications</a>
           <a href="#software">Software</a>
-          <a href="#preprints">Preprints</a>
           <a href="#people">People</a>
           <a href="#join">Join</a>
           <a href="#contact">Contact</a>
@@ -206,20 +209,23 @@
         </div>
       </section>
 
-      <section class="section tinted" id="publications" aria-labelledby="papers-title">
+      <section class="section tinted" id="publications" aria-labelledby="publications-title">
         <div class="shell">
           <header class="section-head">
-            <h2 id="papers-title">Latest peer-reviewed papers</h2>
+            <h2 id="publications-title">Publications</h2>
+            <p class="profile-links" aria-label="Publication records">
+              <a class="button quiet" href="publications.html">All publications</a>
+              <a href="https://scholar.google.com/citations?user=ZEI-IzMAAAAJ&amp;hl=en&amp;authuser=1" target="_blank" rel="noreferrer">Google Scholar</a>
+              <a href="https://orcid.org/0000-0001-9590-3875" target="_blank" rel="noreferrer">ORCID</a>
+              <a href="https://www.scopus.com/authid/detail.uri?authorId=55612440000" target="_blank" rel="noreferrer">Scopus</a>
+            </p>
           </header>
 
+          <h3 class="pub-subhead">Recent peer-reviewed papers</h3>
           <div class="pub-grid" data-pub-latest="article" data-count="3" aria-live="polite"></div>
 
-          <div class="profile-links" aria-label="Scholarly profiles">
-            <a class="button quiet" href="publications.html">All publications</a>
-            <a href="https://scholar.google.com/citations?user=ZEI-IzMAAAAJ&amp;hl=en&amp;authuser=1" target="_blank" rel="noreferrer">Google Scholar</a>
-            <a href="https://orcid.org/0000-0001-9590-3875" target="_blank" rel="noreferrer">ORCID 0000-0001-9590-3875</a>
-            <a href="http://www.scopus.com/inward/authorDetails.url?authorID=55612440000&amp;partnerID=MN8TOARS" target="_blank" rel="noreferrer">Scopus 55612440000</a>
-          </div>
+          <h3 class="pub-subhead">Recent preprints</h3>
+          <div class="pub-grid" data-pub-latest="preprint" data-count="3" aria-live="polite"></div>
         </div>
       </section>
 
@@ -227,7 +233,7 @@
         <div class="shell">
           <header class="section-head">
             <h2 id="software-title">Software</h2>
-            <p>Open-source tools developed in the group, released under open licences.</p>
+            <p>Open-source tools developed in the group.</p>
           </header>
 
           <div class="software-grid">
@@ -241,6 +247,8 @@
               <pre class="install"><code><span aria-hidden="true">$ </span>pip install babappalign</code></pre>
               <p class="software-links">
                 <a href="https://github.com/sinhakrishnendu/BABAPPAlign" target="_blank" rel="noreferrer">Source on GitHub</a>
+                <a href="https://pypi.org/project/babappalign/" target="_blank" rel="noreferrer">PyPI</a>
+                <a href="https://doi.org/10.5281/zenodo.17934124" target="_blank" rel="noreferrer">Zenodo archive</a>
                 <a href="https://doi.org/10.1093/bioinformatics/btag189" target="_blank" rel="noreferrer">Read the paper</a>
               </p>
             </article>
@@ -260,23 +268,8 @@
         </div>
       </section>
 
-      <section class="section tinted" id="preprints" aria-labelledby="preprints-title">
-        <div class="shell">
-          <header class="section-head">
-            <h2 id="preprints-title">Latest preprints</h2>
-            <p>
-              New work shared before peer review, with Dr. Sinha as corresponding author.
-              Preprints that have since appeared in a journal are listed with the published paper instead.
-            </p>
-          </header>
 
-          <div class="pub-grid" data-pub-latest="preprint" data-count="3" aria-live="polite"></div>
-
-          <p class="pub-status" data-pub-status></p>
-        </div>
-      </section>
-
-      <section class="section" id="people" aria-labelledby="people-title">
+      <section class="section tinted" id="people" aria-labelledby="people-title">
         <div class="shell">
           <header class="section-head">
             <h2 id="people-title">People</h2>
@@ -288,18 +281,19 @@
               <h3>Dr. Krishnendu Sinha</h3>
               <p class="role">Principal Investigator, Associate Professor of Zoology</p>
               <p>
-                Dr. Sinha develops computational methods for sequence analysis and evolutionary
-                inference. Current work examines duplicate-gene retention after whole-genome
-                duplication, context-aware alignment, statistical identifiability of episodic
-                selection, protein evolution and interpretable omics indicators. He received his
-                Ph.D. in Molecular Medicine from Bose Institute, Kolkata, and taught at Jhargram Raj
-                College in the West Bengal Education Service before joining Visva-Bharati in 2026.
+                Dr. Sinha leads the Evolutionary Bioinformatics Group in the Department of Zoology at
+                Visva-Bharati. His research combines evolutionary genomics, molecular evolution and the
+                development of computational methods, with a particular interest in making statistical
+                evidence for evolutionary change robust and interpretable. He received his Ph.D. in
+                Molecular Medicine from Bose Institute, Kolkata, his M.Sc. from the University of
+                Calcutta and his B.Sc. from Presidency College, Kolkata. Before joining Visva-Bharati in
+                2026, he taught at Jhargram Raj College in the West Bengal Education Service.
               </p>
               <p class="person-links">
                 <a href="CV/Krishnendu_Sinha_CV.pdf" target="_blank" rel="noreferrer">Curriculum vitae (PDF)</a>
                 <a href="https://orcid.org/0000-0001-9590-3875" target="_blank" rel="noreferrer">ORCID</a>
                 <a href="https://scholar.google.com/citations?user=ZEI-IzMAAAAJ&amp;hl=en&amp;authuser=1" target="_blank" rel="noreferrer">Google Scholar</a>
-                <a href="http://www.scopus.com/inward/authorDetails.url?authorID=55612440000&amp;partnerID=MN8TOARS" target="_blank" rel="noreferrer">Scopus</a>
+                <a href="https://www.scopus.com/authid/detail.uri?authorId=55612440000" target="_blank" rel="noreferrer">Scopus</a>
               </p>
             </div>
           </article>
@@ -347,8 +341,8 @@
                 </div>
               </article>
               <p class="collab-note">
-                Collaborative work spans zoology, microbiome research, neurobiology and biological
-                interpretation across institutions in West Bengal.
+                Collaborations span microbiome research, neurobiology and zoology across institutions
+                in West Bengal.
               </p>
             </div>
           </div>
@@ -399,7 +393,7 @@
             <p>
               <a href="https://orcid.org/0000-0001-9590-3875" target="_blank" rel="noreferrer">ORCID</a>
               <a href="https://scholar.google.com/citations?user=ZEI-IzMAAAAJ&amp;hl=en&amp;authuser=1" target="_blank" rel="noreferrer">Google Scholar</a>
-              <a href="http://www.scopus.com/inward/authorDetails.url?authorID=55612440000&amp;partnerID=MN8TOARS" target="_blank" rel="noreferrer">Scopus</a>
+              <a href="https://www.scopus.com/authid/detail.uri?authorId=55612440000" target="_blank" rel="noreferrer">Scopus</a>
               <a href="https://github.com/sinhakrishnendu" target="_blank" rel="noreferrer">GitHub</a>
             </p>
           </div>
@@ -414,11 +408,11 @@
       </div>
     </footer>
 
-    <script src="figure.js?v=20261019e"></script>
-    <script src="script.js?v=20261019b"></script>
-    <script src="publications-config.js?v=20261019b"></script>
-    <script src="data/publications-snapshot.js?v=20261019b"></script>
-    <script src="publications-core.js?v=20261019b"></script>
-    <script src="publications-ui.js?v=20261019b"></script>
+    <script src="figure.js?v=20261019h"></script>
+    <script src="script.js?v=20261019h"></script>
+    <script src="publications-config.js?v=20261019h"></script>
+    <script src="data/publications-snapshot.js?v=20261019h"></script>
+    <script src="publications-core.js?v=20261019h"></script>
+    <script src="publications-ui.js?v=20261019h"></script>
   </body>
 </html>

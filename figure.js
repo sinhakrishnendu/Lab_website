@@ -180,5 +180,9 @@
     p.style.strokeDasharray = `${len}`;
     p.style.strokeDashoffset = `${len}`;
   });
-  requestAnimationFrame(() => requestAnimationFrame(() => svg.classList.add("is-drawn")));
+  // Reveal on the next frame; the timeout guarantees the tree appears even where
+  // animation frames are paused (background tabs, link-preview crawlers, printing).
+  const reveal = () => svg.classList.add("is-drawn");
+  requestAnimationFrame(() => requestAnimationFrame(reveal));
+  setTimeout(reveal, 400);
 })();

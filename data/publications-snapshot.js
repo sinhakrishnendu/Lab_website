@@ -29,7 +29,7 @@ window.PUBLICATION_SNAPSHOT = {
   ],
   "corresponding": true,
   "pdf": "https://www.biorxiv.org/content/biorxiv/early/2026/10/17/2026.10.13.758761.full.pdf",
-  "summary": "Only older mosquitoes transmit malaria, so how warming changes mosquito ageing matters for disease. Warmer temperatures are known to make mosquitoes age faster, but ′faster′ can mean two different things: the ageing clock ticks more quickly, or it is simply set forward.",
+  "summary": "A transcriptomic clock applied to 115 RNA-seq libraries shows that warmth shifts Anopheles gambiae to an older transcriptional state early in adult life, without speeding up the pace of ageing.",
   "href": "https://doi.org/10.64898/2026.10.13.758761",
   "year": "2026",
   "links": [],
@@ -44,13 +44,25 @@ window.PUBLICATION_SNAPSHOT = {
   "date": "2026-10-15",
   "precision": 3,
   "authors": [
-   {"name": "Satwato Goswami", "isPI": false, "corresponding": false},
-   {"name": "Akshoy Kumar Ghosh", "isPI": false, "corresponding": false},
-   {"name": "Krishnendu Sinha", "isPI": true, "corresponding": true}
+   {
+    "name": "Satwato Goswami",
+    "isPI": false,
+    "corresponding": false
+   },
+   {
+    "name": "Akshoy Kumar Ghosh",
+    "isPI": false,
+    "corresponding": false
+   },
+   {
+    "name": "Krishnendu Sinha",
+    "isPI": true,
+    "corresponding": true
+   }
   ],
   "corresponding": true,
   "pdf": "",
-  "summary": "Transfer RNA (tRNA) genes are usually compact, yet in some Asgard archaea-the closest known prokaryotic relatives of eukaryotes-most are interrupted by introns.",
+  "summary": "A motif-free census of tRNA genes in 90 Asgard archaeal genomes recovers introns missed by standard annotation and shows that they were gained repeatedly, preferentially at sites compatible with splicing.",
   "href": "https://doi.org/10.64898/2026.10.13.758758",
   "year": "2026",
   "links": [],
@@ -78,7 +90,7 @@ window.PUBLICATION_SNAPSHOT = {
   ],
   "corresponding": true,
   "pdf": "https://www.biorxiv.org/content/biorxiv/early/2026/09/03/2026.08.29.748011.full.pdf",
-  "summary": "Tests whether ancestral gene-lineage identity predicts duplicate retention across independent whole-genome duplications, finding reproducible replay that remains shaped by lineage and event history.",
+  "summary": "Following ancestral genes through seven independent whole-genome duplications in plants, fungi and animals shows that duplicate retention is partly repeatable, while deletions and lineage history decide where losses fall.",
   "href": "https://doi.org/10.64898/2026.08.29.748011",
   "year": "2026",
   "links": [],
@@ -129,7 +141,7 @@ window.PUBLICATION_SNAPSHOT = {
   ],
   "corresponding": true,
   "pdf": "https://www.nature.com/articles/s41598-025-34129-6_reference.pdf",
-  "summary": "Combines phylogenomics, codon-based selection tests, ancestral reconstruction, structure calculations and molecular dynamics to examine derived residues in Arabidopsis COL5.",
+  "summary": "Reverse-evolution analysis shows that two residues gained under episodic positive selection stabilise the modern Arabidopsis COL5 fold, whereas restoring the ancestral states destabilises it.",
   "href": "https://doi.org/10.1038/s41598-025-34129-6",
   "year": "2026",
   "links": [],
@@ -215,7 +227,7 @@ window.PUBLICATION_SNAPSHOT = {
   ],
   "corresponding": true,
   "pdf": "",
-  "summary": "Parkinson's disease (PD) is a progressive neurodegenerative disorder marked by the gradual loss of dopaminergic neurons in the substantia nigra, resulting in both motor and non-motor symptoms.",
+  "summary": "Reviews evidence that bacterial curli amyloids from Escherichia coli can cross-seed α-synuclein aggregation, and discusses therapeutic strategies that target curli–α-synuclein interactions in Parkinson's disease.",
   "href": "https://doi.org/10.1016/j.tma.2025.02.002",
   "year": "2025",
   "links": [],

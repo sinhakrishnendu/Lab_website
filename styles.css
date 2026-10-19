@@ -7,7 +7,7 @@
 :root {
   --ink: #1f2427;
   --ink-2: #444c51;
-  --muted: #687075;
+  --muted: #60686d;
   --paper: #fbfaf8;
   --tint: #f0f1ee;
   --line: #d9ddd9;
@@ -519,38 +519,45 @@ div[id] {
   font-weight: 500;
 }
 
-.study-systems {
-  margin-top: 32px;
-  max-width: 52em;
-  color: var(--ink-2);
-}
-
-.study-systems span {
-  display: block;
-  margin-bottom: 4px;
-  font-family: var(--serif);
-  font-size: 1.15rem;
-  color: var(--ink);
-}
-
 /* Publications ----------------------------------------------------------- */
 
 /* Corresponding-author asterisks are explained only on publications.html */
-#publications .corr,
-#preprints .corr {
+#publications .corr {
   display: none;
-}
-
-.pub-legend {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: var(--muted) !important;
 }
 
 .corr {
   color: var(--vermilion);
   font-weight: 700;
   margin-left: 1px;
+}
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px 22px;
+  font-size: 0.95rem;
+}
+
+.profile-links a {
+  white-space: nowrap;
+}
+
+.profile-links .button {
+  margin-right: 4px;
+  text-decoration: none;
+}
+
+.pub-subhead {
+  margin: 0 0 18px;
+  font-size: 1.3rem;
+  color: var(--ink-2);
+}
+
+.pub-grid + .pub-subhead {
+  margin-top: clamp(40px, 5vw, 56px);
 }
 
 .pub-grid {
@@ -603,8 +610,8 @@ div[id] {
   max-width: 14em;
 }
 
-#preprints .pub-venue-mark {
-  color: var(--ochre);
+.pub-card.text-only {
+  border-top: 3px solid var(--ochre);
 }
 
 .pub-body {
@@ -697,10 +704,6 @@ div[id] {
   color: var(--muted);
 }
 
-.profile-links .button {
-  margin-right: 8px;
-}
-
 /* Publications page */
 .pubpage-head {
   padding: clamp(40px, 6vw, 72px) 0 clamp(28px, 4vw, 44px);
@@ -721,6 +724,12 @@ div[id] {
 .pubpage-lead a {
   color: var(--teal);
   text-underline-offset: 3px;
+}
+
+.pub-key {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
 .pub-stats {
@@ -1288,6 +1297,18 @@ div[id] {
   .pub-year {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .pub-visual {
+    height: 132px;
+  }
+
+  .pub-visual img {
+    max-height: 104px;
+  }
+
+  .profile-links {
+    justify-content: flex-start;
   }
 
   .pub-year h2 {

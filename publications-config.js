@@ -29,15 +29,36 @@ window.PUBLICATION_CONFIG = {
   // Works to hide everywhere on the site (for example duplicates or corrections).
   hiddenDois: [],
 
+  // Preprints whose published version has a different title. Preprints with the
+  // same title as a journal article are detected automatically.
+  supersededDois: {
+    "10.21203/rs.3.rs-4429582/v1": "10.1038/s41598-024-77156-5", // soybean WRKY codon usage
+  },
+
+  // Terms set in italics wherever they appear in titles and summaries.
+  italicTerms: [
+    "Anopheles gambiae", "Anopheles darlingi", "Anopheles",
+    "Plasmodium falciparum", "Plasmodium",
+    "Arabidopsis thaliana", "Arabidopsis",
+    "Glycine max", "Escherichia coli", "Saccharomyces cerevisiae", "Drosophila melanogaster",
+    "in vitro", "in vivo", "in silico",
+  ],
+
   // Optional one-sentence summaries. When a DOI is not listed here, the first
   // sentences of the abstract from OpenAlex are used instead.
   summaries: {
+    "10.64898/2026.10.13.758761":
+      "A transcriptomic clock applied to 115 RNA-seq libraries shows that warmth shifts Anopheles gambiae to an older transcriptional state early in adult life, without speeding up the pace of ageing.",
+    "10.64898/2026.10.13.758758":
+      "A motif-free census of tRNA genes in 90 Asgard archaeal genomes recovers introns missed by standard annotation and shows that they were gained repeatedly, preferentially at sites compatible with splicing.",
+    "10.1016/j.tma.2025.02.002":
+      "Reviews evidence that bacterial curli amyloids from Escherichia coli can cross-seed α-synuclein aggregation, and discusses therapeutic strategies that target curli–α-synuclein interactions in Parkinson's disease.",
     "10.64898/2026.08.29.748011":
-      "Tests whether ancestral gene-lineage identity predicts duplicate retention across independent whole-genome duplications, finding reproducible replay that remains shaped by lineage and event history.",
+      "Following ancestral genes through seven independent whole-genome duplications in plants, fungi and animals shows that duplicate retention is partly repeatable, while deletions and lineage history decide where losses fall.",
     "10.1093/bioinformatics/btag189":
       "A progressive multiple sequence alignment engine with a learned residue-level scoring function, protein-language-model embeddings, affine-gap dynamic programming and codon-aware alignment.",
     "10.1038/s41598-025-34129-6":
-      "Combines phylogenomics, codon-based selection tests, ancestral reconstruction, structure calculations and molecular dynamics to examine derived residues in Arabidopsis COL5.",
+      "Reverse-evolution analysis shows that two residues gained under episodic positive selection stabilise the modern Arabidopsis COL5 fold, whereas restoring the ancestral states destabilises it.",
     "10.1101/2025.04.27.650835":
       "A reproducible workflow for orthogroup-centred episodic selection analysis, with alternative alignment pathways and robustness-aware summaries.",
   },

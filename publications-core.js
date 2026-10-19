@@ -27,6 +27,14 @@
 
   const stripTags = (text) => String(text || "").replace(/<[^>]+>/g, "");
 
+  // Titles keep only italic, superscript and subscript markup (e.g. species names, Cd<sup>2+</sup>).
+  const cleanTitle = (text) =>
+    String(text || "")
+      .replace(/<(\/?)em>/gi, "<$1i>")
+      .replace(/<(?!\/?(i|sup|sub)>)[^>]+>/gi, "")
+      .replace(/\s+/g, " ")
+      .trim();
+
   const titleTokens = (title) =>
     new Set(
       stripTags(title)
@@ -99,7 +107,7 @@
       return {
         doi: doiId ? normalizeDoi(doiId["external-id-value"]) : "",
         url: summary.url?.value || doiId?.["external-id-url"]?.value || "",
-        title: stripTags(summary.title?.title?.value || ""),
+        title: cleanTitle(summary.title?.title?.value || ""),
         orcidType: summary.type || "",
         journal: summary["journal-title"]?.value || "",
         year: part("year"),
@@ -192,7 +200,7 @@
     return {
       doi,
       href: doi ? `https://doi.org/${doi}` : orcidWork.url,
-      title: orcidWork.title || stripTags(openAlex?.title),
+      title: orcidWork.title || cleanTitle(openAlex?.title),
       kind,
       venue,
       date,
@@ -208,11 +216,18 @@
     };
   };
 
-  const markSuperseded = (records) => {
+  const markSuperseded = (records, config = {}) => {
+    const manual = Object.fromEntries(
+      Object.entries(config.supersededDois || {}).map(([pre, pub]) => [normalizeDoi(pre), normalizeDoi(pub)]),
+    );
+    records.forEach((r) => {
+      if (manual[r.doi]) r.supersededBy = manual[r.doi];
+    });
     const articles = records.filter((r) => r.kind === "article");
     records
       .filter((r) => r.kind === "preprint")
       .forEach((preprint) => {
+        if (preprint.supersededBy) return;
         const match = articles.find((article) => titleSimilarity(article.title, preprint.title) >= 0.8);
         if (match) preprint.supersededBy = match.doi;
       });
@@ -243,7 +258,7 @@
       .filter((w) => w.title && !hidden.includes(w.doi))
       .map((w) => buildRecord(w, openAlexByDoi.get(w.doi), config));
 
-    return markSuperseded(records).sort((a, b) => sortKey(b).localeCompare(sortKey(a)));
+    return markSuperseded(records, config).sort((a, b) => sortKey(b).localeCompare(sortKey(a)));
   };
 
   const selectLatest = (records, kind, count = 3) =>
@@ -252,5 +267,5 @@
       .sort((a, b) => sortKey(b).localeCompare(sortKey(a)))
       .slice(0, count);
 
-  root.PublicationsCore = { fetchRecords, selectLatest, normalizeDoi, titleSimilarity };
+  root.PublicationsCore = { fetchRecords, selectLatest, normalizeDoi, titleSimilarity, stripTags };
 })(typeof window !== "undefined" ? window : globalThis);
