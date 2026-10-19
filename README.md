@@ -70,7 +70,7 @@ The homepage opens with a decorative circular phylogeny drawn by `figure.js`: a 
 
 Colour on the site follows the dN/dS (ω) classes used in selection analyses: teal for purifying selection (ω < 1, structure and links), ochre for relaxed constraint (ω ≈ 1), and Visva-Bharati vermilion for positive selection (ω > 1, highlights and calls to action). Type is Source Serif 4 for headings and figure captions, Public Sans for body text, and JetBrains Mono only for sequence data, all loaded from Google Fonts.
 
-Page sections: research questions, research programmes (five lines of work with schematic glyphs), latest peer-reviewed papers, software (BABAPPAlign, BABAPPASnake), latest preprints, people and collaborators, joining the group, and contact. The page also carries Open Graph metadata and schema.org `ResearchOrganization` structured data for search engines.
+Page sections: research questions, research themes (four broad, publication-independent areas plus study systems), latest peer-reviewed papers, software (BABAPPAlign, BABAPPASnake), latest preprints, people and collaborators, joining the group, and contact. The page also carries Open Graph metadata and schema.org `ResearchOrganization` structured data for search engines.
 
 `assets/sinha-lab-research-background.png` is no longer shown on the page but is kept as the social-sharing preview image.
 
