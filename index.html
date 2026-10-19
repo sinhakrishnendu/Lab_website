@@ -21,7 +21,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     >
-    <link rel="stylesheet" href="styles.css?v=20261019c">
+    <link rel="stylesheet" href="styles.css?v=20261019d">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -124,28 +124,23 @@
             </div>
           </div>
 
-          <figure class="hero-figure" aria-labelledby="fig1-caption">
+          <figure class="hero-figure">
             <div class="figure-frame">
-              <svg
-                class="selection-figure"
-                data-selection-figure
-                viewBox="0 0 660 420"
-                role="img"
-                aria-label="Illustrative branch-site analysis: a phylogeny of eight Anopheles species with branches coloured by dN/dS class, an amino-acid alignment, and per-site posterior probabilities of positive selection."
-              ></svg>
+              <div class="scale-head">
+                <p class="scale-title">From genomes to residues</p>
+                <div class="scale-tabs" role="tablist" aria-label="Biological scale">
+                  <button type="button" role="tab" data-scale-tab="genome" aria-controls="scale-panel">Genome</button>
+                  <button type="button" role="tab" data-scale-tab="gene" aria-controls="scale-panel">Gene</button>
+                  <button type="button" role="tab" data-scale-tab="alignment" aria-controls="scale-panel">Alignment</button>
+                  <button type="button" role="tab" data-scale-tab="selection" aria-controls="scale-panel">Selection</button>
+                  <button type="button" role="tab" data-scale-tab="protein" aria-controls="scale-panel">Protein</button>
+                </div>
+              </div>
+              <div class="scale-panel" id="scale-panel" role="tabpanel">
+                <svg class="scale-figure" data-scale-figure viewBox="0 0 660 300" role="img"></svg>
+              </div>
             </div>
-            <figcaption id="fig1-caption">
-              <span class="fig-label">Fig. 1</span>
-              An illustrative branch-site test for episodic positive selection. Branches are coloured
-              by their ω (dN/dS) class; columns marked in vermilion are sites where the posterior
-              probability of ω&nbsp;&gt;&nbsp;1 on the foreground lineage exceeds 0.95.
-              Simulated data, for illustration.
-              <span class="omega-legend" aria-label="Legend">
-                <span><i class="swatch purifying"></i>ω &lt; 1, purifying</span>
-                <span><i class="swatch neutral"></i>ω ≈ 1, relaxed</span>
-                <span><i class="swatch positive"></i>ω &gt; 1, positive</span>
-              </span>
-            </figcaption>
+            <figcaption class="scale-caption" data-scale-caption aria-live="polite"></figcaption>
           </figure>
         </div>
       </section>
@@ -499,7 +494,7 @@
       </div>
     </footer>
 
-    <script src="figure.js?v=20261019b"></script>
+    <script src="figure.js?v=20261019d"></script>
     <script src="script.js?v=20261019b"></script>
     <script src="publications-config.js?v=20261019b"></script>
     <script src="data/publications-snapshot.js?v=20261019b"></script>
