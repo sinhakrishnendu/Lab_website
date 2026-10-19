@@ -535,6 +535,12 @@ div[id] {
 
 /* Publications ----------------------------------------------------------- */
 
+/* Corresponding-author asterisks are explained only on publications.html */
+#publications .corr,
+#preprints .corr {
+  display: none;
+}
+
 .pub-legend {
   margin-top: 10px;
   font-size: 0.9rem;
