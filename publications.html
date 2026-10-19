@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Complete list of journal articles, preprints and book chapters by Dr. Krishnendu Sinha and the Evolutionary Bioinformatics Group, Visva-Bharati, updated from ORCID."
+    >
+    <meta name="theme-color" content="#7f1014">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Evolutionary Bioinformatics Group | Visva-Bharati">
+    <meta property="og:description" content="Evolutionary genomics, molecular adaptation, sequence-alignment methods and reproducible software at the Department of Zoology, Visva-Bharati.">
+    <meta property="og:url" content="https://sinhakrishnendu.github.io/Lab_website/">
+    <meta property="og:image" content="https://sinhakrishnendu.github.io/Lab_website/assets/sinha-lab-research-background.png">
+    <title>Publications | Evolutionary Bioinformatics Group</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    >
+    <link rel="stylesheet" href="styles.css?v=20261019b">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <div class="institution-bar">
+        <div class="shell institution-inner">
+          <a class="institution-identity" href="https://www.visvabharati.ac.in/home/" target="_blank" rel="noreferrer">
+            <img src="assets/visva-bharati-logo.png" alt="" width="389" height="420">
+            <span>Visva-Bharati</span>
+          </a>
+          <span class="institution-links">
+            <a href="https://www.visvabharati.ac.in/home/siksha-bhavana/" target="_blank" rel="noreferrer">Siksha Bhavana</a>
+            <a href="https://www.visvabharati.ac.in/home/zoology/" target="_blank" rel="noreferrer">Department of Zoology</a>
+          </span>
+        </div>
+      </div>
+
+      <nav class="shell primary-nav" aria-label="Primary navigation">
+        <a class="brand" href="index.html">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M4 16H11M11 16V7H28M11 16V25H19M19 25V20H28M19 25V30H28" fill="none" stroke-width="2.2" />
+            <circle cx="11" cy="16" r="2.6" />
+          </svg>
+          <span>Evolutionary Bioinformatics Group</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="sr-only">Menu</span>
+        </button>
+
+        <div class="nav-links" id="primary-menu">
+          <a href="index.html#programmes">Research</a>
+          <a href="publications.html" class="is-active" aria-current="page">Publications</a>
+          <a href="index.html#software">Software</a>
+          <a href="index.html#people">People</a>
+          <a href="index.html#join">Join</a>
+          <a href="index.html#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="pubpage-head">
+        <div class="shell">
+          <h1>Publications</h1>
+          <p class="pubpage-lead">
+            Journal articles, preprints and book chapters by Dr. Krishnendu Sinha, read live from
+            <a href="https://orcid.org/0000-0001-9590-3875" target="_blank" rel="noreferrer">ORCID 0000-0001-9590-3875</a>
+            and enriched with author lists and open-access links from OpenAlex.
+            <span class="corr">*</span> marks the corresponding author.
+          </p>
+          <dl class="pub-stats" data-pub-stats></dl>
+        </div>
+      </section>
+
+      <section class="section pubpage" aria-label="Publication list">
+        <div class="shell">
+          <div class="pub-toolbar">
+            <div class="pub-filters" role="group" aria-label="Filter by type">
+              <button type="button" class="is-active" aria-pressed="true" data-pub-filter="all">All</button>
+              <button type="button" aria-pressed="false" data-pub-filter="article">Journal articles</button>
+              <button type="button" aria-pressed="false" data-pub-filter="preprint">Preprints</button>
+              <button type="button" aria-pressed="false" data-pub-filter="chapter">Book chapters</button>
+            </div>
+            <label class="pub-check"><input type="checkbox" data-pub-corr> Corresponding author only</label>
+            <label class="pub-search">
+              <span class="sr-only">Search publications</span>
+              <input type="search" placeholder="Search title, author, journal" data-pub-search>
+            </label>
+          </div>
+          <p class="pub-count" data-pub-count aria-live="polite"></p>
+          <div data-pub-all></div>
+          <p class="pub-status" data-pub-status></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p>&copy; <span data-year></span> Evolutionary Bioinformatics Group, Visva-Bharati</p>
+        <a href="index.html">Back to the group homepage</a>
+      </div>
+    </footer>
+
+    <script src="script.js?v=20261019b"></script>
+    <script src="publications-config.js?v=20261019b"></script>
+    <script src="data/publications-snapshot.js?v=20261019b"></script>
+    <script src="publications-core.js?v=20261019b"></script>
+    <script src="publications-ui.js?v=20261019b"></script>
+  </body>
+</html>

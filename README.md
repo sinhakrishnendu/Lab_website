@@ -22,8 +22,16 @@ Scholarly profiles:
 ```text
 .
 ├── index.html
+├── publications.html
 ├── styles.css
+├── figure.js
 ├── script.js
+├── publications-config.js
+├── publications-core.js
+├── publications-ui.js
+├── data/publications-snapshot.js
+├── scripts/update-publications.mjs
+├── .github/workflows/update-publications.yml
 ├── .nojekyll
 └── assets/
     ├── favicon.svg
@@ -42,9 +50,29 @@ Scholarly profiles:
     └── sinha-lab-research-background.png
 ```
 
-`index.html` contains the research narrative, latest research, people, opportunities, profile links, and contact information. `styles.css` defines the visual identity and responsive layout. `script.js` uses public OpenAlex authorship metadata linked to ORCID `0000-0001-9590-3875`, retains records in which that exact authorship is marked as corresponding author, removes duplicate and repository-deposit records, and displays the three newest papers. A publisher-verified record covers BABAPPAlign while the corresponding-author designation propagates to OpenAlex. A dated local fallback keeps the section available if the public API cannot be reached. The script also controls the mobile navigation and active section states. `.nojekyll` ensures GitHub Pages serves the static files directly.
+`index.html` is the group homepage. `publications.html` is the complete, filterable publication list. `styles.css` holds the visual identity, `figure.js` draws Fig. 1, and `script.js` handles navigation.
 
-The active homepage background is `assets/sinha-lab-research-background.png`, a software-centered visual inspired by BABAPPAlign and BABAPPASnake: multiple sequence alignment blocks, learned residue-level scoring, workflow orchestration, and robustness-summary motifs. The site uses a vermilion-and-peach institutional palette derived from the supplied Visva-Bharati emblem, balanced with warm neutrals and restrained teal accents.
+## Publications (automatic)
+
+The homepage shows the three newest **peer-reviewed journal articles** and the three newest **preprints** for which Dr. Sinha is corresponding author. `publications.html` lists every work, grouped by year, with filters, search, author lists, open-access PDF links and a BibTeX "Cite" button.
+
+How it works:
+
+1. `publications-core.js` reads the public ORCID record (`0000-0001-9590-3875`) every time a page loads.
+2. Each DOI is looked up in OpenAlex for authors, the corresponding-author flag, an open-access PDF and the abstract.
+3. A work counts as corresponding-author when OpenAlex marks the ORCID as corresponding, when it is single-authored, or when its DOI is listed in `correspondingDois` in `publications-config.js`. `notCorrespondingDois` overrides OpenAlex the other way.
+4. A preprint later published as a journal article (near-identical title) is hidden from the preprint list and linked to the published version on the full list.
+5. `data/publications-snapshot.js` is shown instantly and used if ORCID cannot be reached. A GitHub Action (`.github/workflows/update-publications.yml`) rebuilds it every night from ORCID and commits it when something changed. It can also be run by hand from the repository's Actions tab, or locally with `node scripts/update-publications.mjs`.
+
+To keep the lists current, add new papers and preprints to ORCID. A very new preprint may take a few days to appear in OpenAlex; until then its corresponding-author status is unknown, so add its DOI to `correspondingDois` if it should appear immediately. Short curated summaries and extra links (for example code) are set per DOI in `publications-config.js`.
+
+The homepage opens with Fig. 1, drawn by `figure.js` as inline SVG: an illustrative branch-site test for episodic positive selection across eight *Anopheles* species, with branches coloured by ω (dN/dS) class, an amino-acid alignment, and per-site posterior probabilities of ω > 1. The data are simulated with a fixed random seed, so the figure is identical on every load, and the caption states that it is illustrative. The figure animates once on load and is static for visitors who prefer reduced motion.
+
+Colour on the site is semantic and follows the same ω classes: teal for purifying selection (ω < 1, structure and links), ochre for relaxed constraint (ω ≈ 1), and Visva-Bharati vermilion for positive selection (ω > 1, highlights and calls to action). Type is Source Serif 4 for headings and figure captions, Public Sans for body text, and JetBrains Mono only for sequence data, all loaded from Google Fonts.
+
+Page sections: research questions, research programmes (five lines of work with schematic glyphs), latest peer-reviewed papers, software (BABAPPAlign, BABAPPASnake), latest preprints, people and collaborators, joining the group, and contact. The page also carries Open Graph metadata and schema.org `ResearchOrganization` structured data for search engines.
+
+`assets/sinha-lab-research-background.png` is no longer shown on the page but is kept as the social-sharing preview image.
 
 The browser tab favicon is `assets/favicon.svg`, an original abstract alignment/workflow mark.
 
