@@ -75,7 +75,10 @@
       .trim();
     // OpenAlex abstracts sometimes start mid-sentence; show nothing rather than a fragment.
     if (!clean || !/^[A-Z0-9“"(]/.test(clean)) return "";
-    const sentences = clean.match(/[^.!?]+[.!?]+(\s|$)/g) || [clean];
+    // Protect abbreviations such as "(L.) Merr.", "e.g." and "et al." from being read as sentence ends.
+    const ABBR = /\b(e\.g|i\.e|et al|Merr|spp?|var|cf|vs|approx|Fig|[A-Z])\./g;
+    const guarded = clean.replace(ABBR, (m) => m.replace(/\./g, "\u2024"));
+    const sentences = (guarded.match(/[^.!?]+[.!?]+(\s|$)/g) || [guarded]).map((t) => t.replace(/\u2024/g, "."));
     let out = "";
     for (const sentence of sentences) {
       if ((out + sentence).length > limit && out) break;
@@ -91,6 +94,17 @@
       const v = variant.toLowerCase().replace(/[^a-z ]/g, " ").replace(/\s+/g, " ").trim();
       return n === v;
     }) || (/\bsinha\b/.test(n) && /^k/.test(n));
+  };
+
+  // A review is identified from the settings lists, from OpenAlex's "review" type
+  // (stored on the record), or from the word "review" in the title. Works on
+  // saved snapshot records too, so the rule applies even before a refresh.
+  const isReview = (record, config = {}) => {
+    const doi = normalizeDoi(record.doi);
+    if ((config.notReviewDois || []).map(normalizeDoi).includes(doi)) return false;
+    if ((config.reviewDois || []).map(normalizeDoi).includes(doi)) return true;
+    if (record.openAlexType === "review") return true;
+    return /\breview\b/i.test(stripTags(record.title));
   };
 
   /* ---------------- ORCID ---------------- */
@@ -197,7 +211,7 @@
     const summary =
       config.summaries?.[doi] || firstSentences(reconstructAbstract(openAlex?.abstract_inverted_index));
 
-    return {
+    const record = {
       doi,
       href: doi ? `https://doi.org/${doi}` : orcidWork.url,
       title: orcidWork.title || cleanTitle(openAlex?.title),
@@ -209,11 +223,14 @@
       authors: authors.map(({ name, isPI, corresponding: c }) => ({ name, isPI, corresponding: c })),
       corresponding,
       correspondingSource,
+      openAlexType: openAlex?.type || "",
       pdf: openAlex?.best_oa_location?.pdf_url || "",
       summary,
       links: config.extraLinks?.[doi] || [],
       supersededBy: "",
     };
+    record.isReview = record.kind === "article" && isReview(record, config);
+    return record;
   };
 
   const markSuperseded = (records, config = {}) => {
@@ -261,11 +278,13 @@
     return markSuperseded(records, config).sort((a, b) => sortKey(b).localeCompare(sortKey(a)));
   };
 
-  const selectLatest = (records, kind, count = 3) =>
+  // Homepage tiles: original research only (reviews excluded), corresponding author.
+  const selectLatest = (records, kind, count = 3, config = {}) =>
     records
       .filter((r) => r.kind === kind && r.corresponding === true && !r.supersededBy)
+      .filter((r) => !(r.kind === "article" && isReview(r, config)))
       .sort((a, b) => sortKey(b).localeCompare(sortKey(a)))
       .slice(0, count);
 
-  root.PublicationsCore = { fetchRecords, selectLatest, normalizeDoi, titleSimilarity, stripTags };
+  root.PublicationsCore = { fetchRecords, selectLatest, isReview, normalizeDoi, titleSimilarity, stripTags };
 })(typeof window !== "undefined" ? window : globalThis);

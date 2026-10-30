@@ -81,6 +81,7 @@
   };
 
   const kindLabel = { article: "Journal article", preprint: "Preprint", chapter: "Book chapter", other: "Other" };
+  const review = (record) => record.kind === "article" && core.isReview(record, config);
 
   const card = (record) => {
     const c = cover(record);
@@ -107,6 +108,7 @@
       ${record.authors?.length ? `<p class="pub-authors">${authorList(record, 14)}</p>` : ""}
       <p class="pub-meta">
         ${record.kind !== "article" ? `<span class="pub-kind">${esc(kindLabel[record.kind])}</span>` : ""}
+        ${review(record) ? `<span class="pub-kind review">Review</span>` : ""}
         <em>${esc(record.venue)}</em>${record.date ? `, ${esc(formatDate(record))}` : ""}
       </p>
       <p class="pub-links">${linkRow(record)}</p>
@@ -118,7 +120,7 @@
     document.querySelectorAll("[data-pub-latest]").forEach((target) => {
       const kind = target.getAttribute("data-pub-latest");
       const count = Number(target.getAttribute("data-count") || 3);
-      const selected = core.selectLatest(records, kind, count);
+      const selected = core.selectLatest(records, kind, count, config);
       target.innerHTML = selected.length
         ? selected.map(card).join("")
         : `<p class="pub-empty">No records found yet. See the full list on <a href="https://orcid.org/${esc(config.orcid)}">ORCID</a>.</p>`;
@@ -136,7 +138,8 @@
     const listed = allRecords.filter((r) => !r.supersededBy);
     const visible = listed.filter((r) => {
       if (kind === "preprint" && r.kind !== "preprint") return false;
-      if (kind === "article" && r.kind !== "article") return false;
+      if (kind === "research" && (r.kind !== "article" || review(r))) return false;
+      if (kind === "review" && !review(r)) return false;
       if (kind === "chapter" && r.kind !== "chapter") return false;
       if (corrOnly && !r.corresponding) return false;
       if (query) {
@@ -174,8 +177,10 @@
     if (!target || !allRecords.length) return;
     const n = (kind) => allRecords.filter((r) => r.kind === kind && !r.supersededBy).length;
     const corr = allRecords.filter((r) => r.corresponding && !r.supersededBy).length;
+    const reviews = allRecords.filter((r) => review(r) && !r.supersededBy).length;
     target.innerHTML = [
-      ["Journal articles", n("article")],
+      ["Research articles", n("article") - reviews],
+      ["Reviews", reviews],
       ["Preprints", n("preprint")],
       ["Book chapters", n("chapter")],
       ["As corresponding author", corr],

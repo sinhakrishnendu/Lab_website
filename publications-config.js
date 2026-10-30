@@ -29,6 +29,22 @@ window.PUBLICATION_CONFIG = {
   // Works to hide everywhere on the site (for example duplicates or corrections).
   hiddenDois: [],
 
+  // Review articles. Reviews never appear in the homepage tiles, which show
+  // original research only; on the full list they carry a "Review" label.
+  // OpenAlex-labelled reviews and titles containing "review" are also detected
+  // automatically, so new reviews need adding here only if both checks miss them.
+  reviewDois: [
+    "10.1016/j.tma.2025.02.002", // Curli protein and α-synucleopathy (Transl. Med. Aging 2025)
+    "10.2174/1389200224666221227094144", // Machine learning in drug metabolism (Curr. Drug Metab. 2022)
+    "10.2174/1389200215666141125121659", // Cytochrome P450s (Curr. Drug Metab. 2014)
+    "10.1021/acs.chemrestox.4c00057", // Pesticides and the gut microbiota (Chem. Res. Toxicol. 2024)
+    "10.1021/acs.chemrestox.2c00375", // Deep learning in predictive toxicology (Chem. Res. Toxicol. 2023)
+    "10.1016/j.fct.2013.09.026", // Oxidative stress-mediated organ pathophysiology (Food Chem. Toxicol. 2013)
+    "10.1007/s00204-013-1034-4", // Oxidative stress and apoptosis pathways (Arch. Toxicol. 2013)
+  ],
+  // Original research that would otherwise be mistaken for a review.
+  notReviewDois: [],
+
   // Preprints whose published version has a different title. Preprints with the
   // same title as a journal article are detected automatically.
   supersededDois: {
@@ -40,7 +56,7 @@ window.PUBLICATION_CONFIG = {
     "Anopheles gambiae", "Anopheles darlingi", "Anopheles",
     "Plasmodium falciparum", "Plasmodium",
     "Arabidopsis thaliana", "Arabidopsis",
-    "Glycine max", "Escherichia coli", "Saccharomyces cerevisiae", "Drosophila melanogaster",
+    "Glycine max", "Escherichia coli", "Enterobacter ludwigii", "Enterobacter", "Cirrhinus mrigala", "Saccharomyces cerevisiae", "Drosophila melanogaster",
     "in vitro", "in vivo", "in silico",
   ],
 
@@ -51,6 +67,8 @@ window.PUBLICATION_CONFIG = {
       "A transcriptomic clock applied to 115 RNA-seq libraries shows that warmth shifts Anopheles gambiae to an older transcriptional state early in adult life, without speeding up the pace of ageing.",
     "10.64898/2026.10.13.758758":
       "A motif-free census of tRNA genes in 90 Asgard archaeal genomes recovers introns missed by standard annotation and shows that they were gained repeatedly, preferentially at sites compatible with splicing.",
+    "10.1038/s41598-024-77156-5":
+      "Codon-usage and selection analyses of 179 soybean WRKY coding sequences show that selection outweighs mutation in shaping codon usage, with pervasive purifying selection and episodic positive selection in particular clades.",
     "10.1016/j.tma.2025.02.002":
       "Reviews evidence that bacterial curli amyloids from Escherichia coli can cross-seed α-synuclein aggregation, and discusses therapeutic strategies that target curli–α-synuclein interactions in Parkinson's disease.",
     "10.64898/2026.08.29.748011":
