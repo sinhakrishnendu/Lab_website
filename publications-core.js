@@ -107,6 +107,21 @@
     return /\breview\b/i.test(stripTags(record.title));
   };
 
+  // OpenAlex sometimes links an author to the wrong profile (its display name then
+  // names someone else). Prefer the name as printed on the paper in that case.
+  const nameTokens = (name) =>
+    new Set(String(name || "").toLowerCase().normalize("NFD").replace(/[^a-z\s]/g, " ").split(/\s+/).filter((t) => t.length > 1));
+  const authorName = (a) => {
+    const display = a.author?.display_name || "";
+    let raw = String(a.raw_author_name || "").trim();
+    if (/^[^,]+,\s*[^,]+$/.test(raw)) raw = raw.replace(/^([^,]+),\s*(.+)$/, "$2 $1"); // "Last, First"
+    if (!raw) return display;
+    if (!display) return raw;
+    const d = nameTokens(display);
+    const shared = [...nameTokens(raw)].some((t) => d.has(t));
+    return shared ? display : raw;
+  };
+
   /* ---------------- ORCID ---------------- */
 
   const parseOrcidWorks = (json) =>
@@ -183,7 +198,7 @@
         ? a.author?.orcid === orcidUrl
         : !nameMatched && isPiName(a.author?.display_name, config);
       if (isPI && !orcidLinked) nameMatched = true;
-      return { name: a.author?.display_name || "", isPI, corresponding: a.is_corresponding === true };
+      return { name: authorName(a), isPI, corresponding: a.is_corresponding === true };
     });
     const pi = authors.find((a) => a.isPI);
 

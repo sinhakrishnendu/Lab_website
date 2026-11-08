@@ -53,6 +53,10 @@ Scholarly profiles:
 
 `index.html` is the group homepage. `publications.html` is the complete, filterable publication list. `styles.css` holds the visual identity, `figure.js` draws Fig. 1, and `script.js` handles navigation.
 
+## News
+
+The News section on the homepage is a short, hand-edited list in `index.html` (look for `class="news-list"`). Add each new item at the top as a `<li>` with a `<time datetime="YYYY-MM-DD">` date and one or two sentences linking to the paper or event.
+
 ## Publications (automatic)
 
 The homepage Publications section shows the three newest **peer-reviewed journal articles** and the three newest **preprints** for which Dr. Sinha is corresponding author. `publications.html` lists every work, grouped by year, with filters, search, author lists, open-access PDF links and a BibTeX "Cite" button.
