@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Evolutionary Bioinformatics Group at Visva-Bharati studies evolutionary genomics, molecular adaptation, sequence alignment, statistical phylogenetics, and reproducible bioinformatics."
+      content="Evolutionary Bioinformatics Group at Visva-Bharati studies archaeal biology and the origin of eukaryotes through comparative genomics, phylogenetics and careful computational inference."
     >
     <meta name="theme-color" content="#7f1014">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Evolutionary Bioinformatics Group | Visva-Bharati">
-    <meta property="og:description" content="Evolutionary genomics, molecular adaptation, sequence-alignment methods and reproducible software at the Department of Zoology, Visva-Bharati.">
+    <meta property="og:description" content="Archaeal biology and the origin of eukaryotes, studied through comparative genomics and phylogenetics at the Department of Zoology, Visva-Bharati.">
     <meta property="og:url" content="https://sinhakrishnendu.github.io/Lab_website/">
     <meta property="og:image" content="https://sinhakrishnendu.github.io/Lab_website/assets/og-image.png">
     <meta property="og:image:width" content="1200">
@@ -57,12 +57,13 @@
           ]
         },
         "knowsAbout": [
-          "Evolutionary genomics",
-          "Molecular evolution",
-          "Statistical phylogenetics",
-          "Multiple sequence alignment",
-          "Positive selection",
-          "Ancestral sequence reconstruction"
+          "Archaeal biology",
+          "Eukaryogenesis",
+          "Asgard archaea",
+          "Comparative genomics",
+          "Phylogenomics",
+          "Genome evolution",
+          "Bioinformatics"
         ]
       }
     </script>
@@ -118,9 +119,10 @@
             <p class="hero-affiliation">Department of Zoology, Visva-Bharati, Santiniketan</p>
             <h1 id="hero-title">Reading evolutionary history in sequences</h1>
             <p class="hero-copy">
-              The Evolutionary Bioinformatics Group studies how natural selection, gene duplication
-              and lineage history leave measurable traces in genes, proteins and genomes, and
-              builds transparent statistical and computational methods to read them.
+              The Evolutionary Bioinformatics Group studies archaeal biology and the origin of
+              eukaryotes. We use comparative genomics and phylogenetics to trace how the features of
+              complex cells arose from archaeal ancestors, and careful computational methods to read
+              that deep history from genomes.
             </p>
             <div class="hero-actions">
               <a class="button primary" href="#programmes">Explore our research</a>
@@ -139,13 +141,13 @@
           <h2 id="questions-title">The questions behind our work</h2>
           <ol class="question-list">
             <li>
-              <p>Which evolutionary patterns repeat across independent lineages, and which depend on history?</p>
+              <p>Which features of the eukaryotic cell were already present in its archaeal ancestors, and which arose afterwards?</p>
             </li>
             <li>
-              <p>When is a molecular signal of selection statistically identifiable, rather than an artefact of the model or the alignment?</p>
+              <p>How did genes and genomes change in structure, through gain, loss and duplication, across the transition from archaea to eukaryotes?</p>
             </li>
             <li>
-              <p>How can sequence-level evidence be connected to protein structure and biological function without overstating the inference?</p>
+              <p>When can a signal this deep in time be recovered reliably from sequence data, rather than created by annotation, alignment or model choice?</p>
             </li>
           </ol>
         </div>
@@ -156,55 +158,51 @@
           <header class="section-head">
             <h2 id="programmes-title">Research</h2>
             <p>
-              We study how evolution writes itself into genomes, genes and proteins, and we build
-              the statistical and computational methods needed to read that record reliably.
-              Four connected themes run through the group's work.
+              We study the biology of archaea and what their genomes reveal about the origin of
+              eukaryotes, and we build the computational approaches needed to read that record
+              reliably. Four connected themes run through the group's work.
             </p>
           </header>
 
           <div class="theme-grid">
             <article class="theme">
-              <h3>Genome and gene-family evolution</h3>
+              <h3>Archaeal genome biology</h3>
               <p>
-                Genomes are reshaped by duplication, loss and the gain of new structural features.
-                We ask which of these changes recur predictably across independent lineages and
-                which depend on the particular history of each lineage, from whole-genome
-                duplications to the architecture of individual genes.
+                Archaea are a domain of life in their own right, and the Asgard lineages are the
+                closest known prokaryotic relatives of eukaryotes. We study archaeal genomes, their gene
+                content and gene structure, and how these vary across the archaeal tree.
               </p>
-              <p class="theme-approaches">Comparative genomics, orthology and gene-family inference, ancestral-state reconstruction</p>
+              <p class="theme-approaches">Comparative genomics, genome annotation, metagenome-assembled genomes</p>
             </article>
 
             <article class="theme">
-              <h3>Molecular adaptation and natural selection</h3>
+              <h3>Eukaryogenesis</h3>
               <p>
-                Natural selection leaves statistical signatures in coding sequences, but those
-                signatures are easily confounded by alignment error, model misspecification and
-                limited data. We develop and apply tests of adaptive and constrained evolution with
-                explicit attention to when a signal is genuinely identifiable.
+                The eukaryotic cell arose from a partnership involving an archaeal host. We trace
+                hallmark eukaryotic genes and molecular features back to their archaeal origins to ask
+                what the ancestor of eukaryotes already had, and what was gained along the way.
               </p>
-              <p class="theme-approaches">Codon models, lineage- and site-specific tests, codon usage, simulation and sensitivity analysis</p>
+              <p class="theme-approaches">Phylogenomics, gene-family evolution, ancestral-state reconstruction</p>
             </article>
 
             <article class="theme">
-              <h3>Protein evolution, structure and function</h3>
+              <h3>Gene and genome architecture</h3>
               <p>
-                Sequence change matters through its effect on proteins. We reconstruct ancestral
-                sequences and follow historical substitutions into structure, stability and
-                dynamics, connecting evolutionary inference to molecular mechanism without
-                overstating what the sequence evidence can support.
+                Introns, duplications and gene losses reshape genomes over deep time. We ask where
+                such changes arise repeatedly and where they depend on the particular history of a
+                lineage, from whole gene families to the structure of individual genes.
               </p>
-              <p class="theme-approaches">Ancestral sequence reconstruction, structural bioinformatics, molecular dynamics</p>
+              <p class="theme-approaches">Orthology inference, gene-tree reconciliation, ancestral reconstruction of gene structure</p>
             </article>
 
             <article class="theme">
-              <h3>Computational methods and reproducible inference</h3>
+              <h3>Reliable inference and tool development</h3>
               <p>
-                Every evolutionary conclusion rests on a chain of computational choices. We build
-                open methods for sequence alignment, evolutionary analysis and omics
-                interpretation, and design workflows that report how robust each result is to
-                the choices made along the way.
+                Deep evolutionary signals are faint and easily distorted by the way data are annotated,
+                aligned and modelled. We design approaches that avoid circular reasoning and test how
+                robust each conclusion is, and we develop open-source tools when existing ones fall short.
               </p>
-              <p class="theme-approaches">Sequence alignment, machine learning on biological sequences, workflow design, open-source software</p>
+              <p class="theme-approaches">Phylogenetic inference, sequence alignment, workflow design, open-source software</p>
             </article>
           </div>
         </div>
@@ -266,7 +264,10 @@
         <div class="shell">
           <header class="section-head">
             <h2 id="software-title">Software</h2>
-            <p>Open-source tools developed in the group.</p>
+            <p>
+              Open-source tools developed in the group. Building careful computational methods remains
+              central to how we work, and new tools will follow the questions we pursue.
+            </p>
           </header>
 
           <div class="software-grid">
@@ -314,9 +315,10 @@
               <p class="role">Principal Investigator, Associate Professor of Zoology</p>
               <p>
                 Dr. Sinha leads the Evolutionary Bioinformatics Group in the Department of Zoology at
-                Visva-Bharati. His research combines evolutionary genomics, molecular evolution and the
-                development of computational methods, with a particular interest in making statistical
-                evidence for evolutionary change robust and interpretable. He received his Ph.D. in
+                Visva-Bharati. His research focuses on archaeal biology and the origin of eukaryotes, combining
+                comparative genomics, phylogenetics and the development of computational methods, with a
+                particular interest in making evidence for deep evolutionary events robust and
+                interpretable. He received his Ph.D. in
                 Molecular Medicine from Bose Institute, Kolkata, his M.Sc. from the University of
                 Calcutta and his B.Sc. from Presidency College, Kolkata. Before joining Visva-Bharati in
                 2026, he taught at Jhargram Raj College in the West Bengal Education Service.
@@ -410,11 +412,11 @@
             </div>
             <div>
               <dt>What you will learn</dt>
-              <dd>Orthology and gene-family analysis, sequence alignment, phylogenetics, codon models, simulation, Python and reproducible workflows.</dd>
+              <dd>Comparative and archaeal genomics, genome annotation, orthology and gene-family analysis, phylogenetics, Python and reproducible workflows.</dd>
             </div>
             <div>
               <dt>Collaborators</dt>
-              <dd>We welcome work on genome evolution, plant and parasite protein evolution, microbiome and neurodegeneration research, and independent validation of computational methods.</dd>
+              <dd>We welcome work on archaeal and microbial genomics, the evolution of eukaryotic cell biology, comparative genomics, and computational method development.</dd>
             </div>
           </dl>
         </div>
