@@ -2,7 +2,7 @@
 
 Official website repository for the Evolutionary Bioinformatics Group, Department of Zoology, Siksha Bhavana, Visva-Bharati.
 
-The website presents the group's current research identity: archaeal biology and the origin of eukaryotes (eukaryogenesis), studied through comparative genomics, phylogenetics and careful computational inference, with tool development as a continuing part of the work. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
+The website presents the group's current research identity: archaeal biology, the origin of eukaryotes (eukaryogenesis) and whole-genome duplication across eukaryotes, studied through comparative genomics, phylogenetics and careful computational inference, with tool development as a continuing part of the work. It is maintained as a lightweight static site for reliable publication through GitHub Pages.
 
 ## Website
 
